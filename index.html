@@ -1,0 +1,2155 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okul Veli Randevu Sistemi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* NAVİGASYON */
+        .navbar {
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #4a3f8a;
+        }
+
+        .navbar .logo span {
+            font-size: 1.8em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 5px;
+        }
+
+        .nav-links button {
+            padding: 10px 20px;
+            border: none;
+            background: transparent;
+            color: #555;
+            font-size: 0.95em;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links button:hover,
+        .nav-links button.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-info .avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .user-info .user-name {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .user-info .user-role {
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            border: 2px solid #e74c3c;
+            background: transparent;
+            color: #e74c3c;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        /* LOGIN SAYFASI */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 20px;
+        }
+
+        .login-box {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .login-box h2 {
+            text-align: center;
+            color: #4a3f8a;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            padding: 10px 24px;
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-success {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .btn-danger {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .btn-warning {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .role-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        .role-btn {
+            flex: 1;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .role-btn:hover {
+            border-color: #667eea;
+        }
+
+        .role-btn.active {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+        }
+
+        .role-btn .role-icon {
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .role-btn .role-text {
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* SECTION BAŞLIKLARI */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .section-header h2 {
+            color: white;
+            font-size: 1.8em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        /* İSTATİSTİK KARTLARI */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+        }
+
+        .stat-icon.blue { background: linear-gradient(135deg, #667eea, #764ba2); }
+        .stat-icon.green { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .stat-icon.orange { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .stat-icon.red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+
+        .stat-info h3 {
+            font-size: 1.8em;
+            color: #333;
+        }
+
+        .stat-info p {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* KART PANELLERİ */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-bottom: 25px;
+        }
+
+        .card h3 {
+            color: #4a3f8a;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* TAKVİM */
+        .calendar-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .calendar {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header h3 {
+            color: #4a3f8a;
+            font-size: 1.2em;
+        }
+
+        .calendar-nav {
+            display: flex;
+            gap: 5px;
+        }
+
+        .calendar-nav button {
+            width: 35px;
+            height: 35px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s;
+        }
+
+        .calendar-nav button:hover {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-day-name {
+            text-align: center;
+            font-weight: 700;
+            color: #888;
+            font-size: 0.85em;
+            padding: 8px 0;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .calendar-day:hover {
+            background: rgba(102,126,234,0.1);
+        }
+
+        .calendar-day.today {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 700;
+        }
+
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #2ecc71, #27ae60);
+            color: white;
+            font-weight: 700;
+        }
+
+        .calendar-day.has-appointment {
+            position: relative;
+        }
+
+        .calendar-day.has-appointment::after {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #e74c3c;
+            border-radius: 50%;
+            position: absolute;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .calendar-day.empty {
+            cursor: default;
+        }
+
+        .calendar-day.past {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* SAAT SEÇİMİ */
+        .time-slots {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .time-slots h3 {
+            color: #4a3f8a;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .time-slot:hover:not(.taken) {
+            border-color: #667eea;
+            background: rgba(102,126,234,0.05);
+        }
+
+        .time-slot.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .time-slot.taken {
+            background: #f0f0f0;
+            color: #bbb;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* RANDEVU LİSTESİ */
+        .appointment-list {
+            list-style: none;
+        }
+
+        .appointment-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            transition: all 0.3s;
+        }
+
+        .appointment-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 3px 15px rgba(102,126,234,0.1);
+        }
+
+        .appointment-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .appointment-date-badge {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .appointment-date-badge .day {
+            font-size: 1.3em;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .appointment-date-badge .month {
+            font-size: 0.7em;
+            text-transform: uppercase;
+        }
+
+        .appointment-details h4 {
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .appointment-details p {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .appointment-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .status-badge.pending {
+            background: #fff3e0;
+            color: #f39c12;
+        }
+
+        .status-badge.approved {
+            background: #e8f5e9;
+            color: #27ae60;
+        }
+
+        .status-badge.rejected {
+            background: #ffebee;
+            color: #e74c3c;
+        }
+
+        .status-badge.completed {
+            background: #e3f2fd;
+            color: #2196f3;
+        }
+
+        /* ÖĞRETMEN LİSTESİ */
+        .teacher-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .teacher-card {
+            border: 2px solid #f0f0f0;
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .teacher-card:hover,
+        .teacher-card.selected {
+            border-color: #667eea;
+            box-shadow: 0 5px 20px rgba(102,126,234,0.15);
+        }
+
+        .teacher-card.selected {
+            background: rgba(102,126,234,0.05);
+        }
+
+        .teacher-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .teacher-info h4 {
+            color: #333;
+        }
+
+        .teacher-info p {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        /* TAB SİSTEMİ */
+        .tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+
+        .tab-btn {
+            padding: 10px 20px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #888;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            border-color: #667eea;
+            color: #667eea;
+            background: rgba(102,126,234,0.05);
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-30px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal h3 {
+            color: #4a3f8a;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-actions button {
+            flex: 1;
+        }
+
+        /* NOTIFICATION */
+        .notification {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            z-index: 300;
+            animation: slideRight 0.3s ease;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .notification.success { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+        .notification.error { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .notification.info { background: linear-gradient(135deg, #3498db, #2980b9); }
+
+        @keyframes slideRight {
+            from { transform: translateX(100px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* ARAMA */
+        .search-box {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1em;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box input:focus {
+            border-color: #667eea;
+        }
+
+        .search-box::before {
+            content: '🔍';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.1em;
+        }
+
+        /* FİLTRE */
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-row select {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 0.95em;
+            outline: none;
+            cursor: pointer;
+            min-width: 180px;
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #888;
+        }
+
+        .empty-state .empty-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .empty-state p {
+            font-size: 1.1em;
+        }
+
+        /* HIDDEN */
+        .hidden {
+            display: none !important;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .nav-links {
+                order: 3;
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .calendar-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .appointment-item {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .filter-row {
+                flex-direction: column;
+            }
+
+            .filter-row select {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .teacher-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .role-selector {
+                flex-direction: column;
+            }
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #e0e0e0;
+            color: #888;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+
+        .step.active .step-number {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .step.completed .step-number {
+            background: #2ecc71;
+            color: white;
+        }
+
+        .step-text {
+            font-weight: 600;
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .step.active .step-text {
+            color: #4a3f8a;
+        }
+
+        .step-line {
+            width: 40px;
+            height: 2px;
+            background: #e0e0e0;
+            align-self: center;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .summary-row:last-child {
+            border-bottom: none;
+        }
+
+        .summary-label {
+            color: #888;
+            font-weight: 500;
+        }
+
+        .summary-value {
+            color: #333;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- GİRİŞ SAYFASI -->
+    <div id="loginPage">
+        <nav class="navbar">
+            <div class="logo">
+                <span>🏫</span>
+                Veli Randevu Sistemi
+            </div>
+        </nav>
+        <div class="login-container">
+            <div class="login-box">
+                <h2>Hoş Geldiniz</h2>
+                <p class="subtitle">Sisteme giriş yapmak için bilgilerinizi giriniz</p>
+
+                <div class="role-selector">
+                    <div class="role-btn active" onclick="selectRole('veli')" id="roleVeli">
+                        <div class="role-icon">👨‍👩‍👧</div>
+                        <div class="role-text">Veli</div>
+                    </div>
+                    <div class="role-btn" onclick="selectRole('ogretmen')" id="roleOgretmen">
+                        <div class="role-icon">👩‍🏫</div>
+                        <div class="role-text">Öğretmen</div>
+                    </div>
+                    <div class="role-btn" onclick="selectRole('yonetici')" id="roleYonetici">
+                        <div class="role-icon">👨‍💼</div>
+                        <div class="role-text">Yönetici</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Kullanıcı Adı / TC Kimlik</label>
+                    <input type="text" id="loginUsername" placeholder="Kullanıcı adınızı giriniz">
+                </div>
+                <div class="form-group">
+                    <label>Şifre</label>
+                    <input type="password" id="loginPassword" placeholder="Şifrenizi giriniz">
+                </div>
+                <button class="btn-primary" onclick="login()">Giriş Yap</button>
+                <p style="text-align:center; margin-top:15px; color:#888; font-size:0.85em;">
+                    Demo: Herhangi bir kullanıcı adı/şifre ile giriş yapabilirsiniz
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANA UYGULAMA -->
+    <div id="mainApp" class="hidden">
+        <nav class="navbar">
+            <div class="logo">
+                <span>🏫</span>
+                Veli Randevu Sistemi
+            </div>
+            <div class="nav-links" id="navLinks">
+                <!-- Dinamik oluşturulacak -->
+            </div>
+            <div class="user-info">
+                <div class="avatar" id="userAvatar">V</div>
+                <div>
+                    <div class="user-name" id="userName">Kullanıcı</div>
+                    <div class="user-role" id="userRole">Veli</div>
+                </div>
+                <button class="logout-btn" onclick="logout()">Çıkış</button>
+            </div>
+        </nav>
+
+        <div class="container" id="mainContent">
+            <!-- Dinamik içerik -->
+        </div>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+        <div class="modal" id="modalContent">
+            <!-- Dinamik modal içerik -->
+        </div>
+    </div>
+
+    <script>
+        // ============ VERİ TABANI (localStorage) ============
+        const DB = {
+            getTeachers() {
+                const defaultTeachers = [
+                    { id: 1, name: 'Ayşe Yılmaz', branch: 'Matematik', class: '5-A, 6-B' },
+                    { id: 2, name: 'Mehmet Kaya', branch: 'Türkçe', class: '5-A, 5-B' },
+                    { id: 3, name: 'Fatma Demir', branch: 'Fen Bilimleri', class: '6-A, 7-A' },
+                    { id: 4, name: 'Ali Öztürk', branch: 'Sosyal Bilgiler', class: '5-B, 6-A' },
+                    { id: 5, name: 'Zeynep Acar', branch: 'İngilizce', class: '5-A, 6-A, 7-A' },
+                    { id: 6, name: 'Hasan Çelik', branch: 'Beden Eğitimi', class: '5-A, 5-B, 6-A' },
+                    { id: 7, name: 'Elif Arslan', branch: 'Müzik', class: '5-A, 5-B, 6-A, 6-B' },
+                    { id: 8, name: 'Emre Koç', branch: 'Rehberlik', class: 'Tüm Sınıflar' }
+                ];
+                return JSON.parse(localStorage.getItem('teachers')) || defaultTeachers;
+            },
+
+            getAppointments() {
+                return JSON.parse(localStorage.getItem('appointments')) || [];
+            },
+
+            saveAppointment(apt) {
+                const apts = this.getAppointments();
+                apt.id = Date.now();
+                apt.createdAt = new Date().toISOString();
+                apts.push(apt);
+                localStorage.setItem('appointments', JSON.stringify(apts));
+                return apt;
+            },
+
+            updateAppointment(id, updates) {
+                const apts = this.getAppointments();
+                const idx = apts.findIndex(a => a.id === id);
+                if (idx !== -1) {
+                    apts[idx] = { ...apts[idx], ...updates };
+                    localStorage.setItem('appointments', JSON.stringify(apts));
+                    return apts[idx];
+                }
+                return null;
+            },
+
+            deleteAppointment(id) {
+                const apts = this.getAppointments().filter(a => a.id !== id);
+                localStorage.setItem('appointments', JSON.stringify(apts));
+            },
+
+            getBlockedSlots() {
+                return JSON.parse(localStorage.getItem('blockedSlots')) || [];
+            },
+
+            blockSlot(slot) {
+                const slots = this.getBlockedSlots();
+                slots.push(slot);
+                localStorage.setItem('blockedSlots', JSON.stringify(slots));
+            },
+
+            unblockSlot(teacherId, date, time) {
+                const slots = this.getBlockedSlots().filter(
+                    s => !(s.teacherId === teacherId && s.date === date && s.time === time)
+                );
+                localStorage.setItem('blockedSlots', JSON.stringify(slots));
+            }
+        };
+
+        // ============ UYGULAMA DURUMU ============
+        let currentUser = null;
+        let currentPage = 'dashboard';
+        let selectedDate = null;
+        let selectedTime = null;
+        let selectedTeacher = null;
+        let currentMonth = new Date().getMonth();
+        let currentYear = new Date().getFullYear();
+        let currentStep = 1;
+
+        // ============ GİRİŞ İŞLEMLERİ ============
+        let selectedRole = 'veli';
+
+        function selectRole(role) {
+            selectedRole = role;
+            document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('role' + role.charAt(0).toUpperCase() + role.slice(1)).classList.add('active');
+        }
+
+        function login() {
+            const username = document.getElementById('loginUsername').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+
+            if (!username) {
+                showNotification('Lütfen kullanıcı adı giriniz', 'error');
+                return;
+            }
+
+            const roleNames = {
+                'veli': 'Veli',
+                'ogretmen': 'Öğretmen',
+                'yonetici': 'Yönetici'
+            };
+
+            currentUser = {
+                username: username,
+                role: selectedRole,
+                roleName: roleNames[selectedRole],
+                name: selectedRole === 'veli' ? 'Ahmet Yıldız' :
+                      selectedRole === 'ogretmen' ? 'Ayşe Yılmaz' : 'Müdür Bey',
+                studentName: selectedRole === 'veli' ? 'Ece Yıldız' : '',
+                studentClass: selectedRole === 'veli' ? '5-A' : '',
+                teacherId: selectedRole === 'ogretmen' ? 1 : null
+            };
+
+            document.getElementById('loginPage').classList.add('hidden');
+            document.getElementById('mainApp').classList.remove('hidden');
+
+            document.getElementById('userName').textContent = currentUser.name;
+            document.getElementById('userRole').textContent = currentUser.roleName;
+            document.getElementById('userAvatar').textContent = currentUser.name.charAt(0);
+
+            buildNavigation();
+            navigateTo('dashboard');
+            showNotification(`Hoş geldiniz, ${currentUser.name}!`, 'success');
+        }
+
+        function logout() {
+            currentUser = null;
+            document.getElementById('loginPage').classList.remove('hidden');
+            document.getElementById('mainApp').classList.add('hidden');
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
+        }
+
+        // ============ NAVİGASYON ============
+        function buildNavigation() {
+            const nav = document.getElementById('navLinks');
+            let buttons = '';
+
+            if (currentUser.role === 'veli') {
+                buttons = `
+                    <button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+                    <button onclick="navigateTo('newAppointment')" id="nav-newAppointment">➕ Yeni Randevu</button>
+                    <button onclick="navigateTo('myAppointments')" id="nav-myAppointments">📋 Randevularım</button>
+                `;
+            } else if (currentUser.role === 'ogretmen') {
+                buttons = `
+                    <button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+                    <button onclick="navigateTo('incomingAppointments')" id="nav-incomingAppointments">📥 Gelen Randevular</button>
+                    <button onclick="navigateTo('schedule')" id="nav-schedule">📅 Müsaitlik</button>
+                `;
+            } else {
+                buttons = `
+                    <button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+                    <button onclick="navigateTo('allAppointments')" id="nav-allAppointments">📋 Tüm Randevular</button>
+                    <button onclick="navigateTo('teachers')" id="nav-teachers">👩‍🏫 Öğretmenler</button>
+                    <button onclick="navigateTo('reports')" id="nav-reports">📈 Raporlar</button>
+                `;
+            }
+
+            nav.innerHTML = buttons;
+        }
+
+        function navigateTo(page) {
+            currentPage = page;
+            document.querySelectorAll('.nav-links button').forEach(b => b.classList.remove('active'));
+            const activeBtn = document.getElementById('nav-' + page);
+            if (activeBtn) activeBtn.classList.add('active');
+
+            const content = document.getElementById('mainContent');
+
+            switch (page) {
+                case 'dashboard': renderDashboard(content); break;
+                case 'newAppointment': renderNewAppointment(content); break;
+                case 'myAppointments': renderMyAppointments(content); break;
+                case 'incomingAppointments': renderIncomingAppointments(content); break;
+                case 'schedule': renderSchedule(content); break;
+                case 'allAppointments': renderAllAppointments(content); break;
+                case 'teachers': renderTeachers(content); break;
+                case 'reports': renderReports(content); break;
+            }
+        }
+
+        // ============ DASHBOARD ============
+        function renderDashboard(container) {
+            const apts = DB.getAppointments();
+            let stats = {};
+
+            if (currentUser.role === 'veli') {
+                const myApts = apts.filter(a => a.parentName === currentUser.name);
+                stats = {
+                    total: myApts.length,
+                    pending: myApts.filter(a => a.status === 'pending').length,
+                    approved: myApts.filter(a => a.status === 'approved').length,
+                    upcoming: myApts.filter(a => a.status === 'approved' && new Date(a.date) >= new Date()).length
+                };
+            } else if (currentUser.role === 'ogretmen') {
+                const myApts = apts.filter(a => a.teacherId === currentUser.teacherId);
+                stats = {
+                    total: myApts.length,
+                    pending: myApts.filter(a => a.status === 'pending').length,
+                    approved: myApts.filter(a => a.status === 'approved').length,
+                    today: myApts.filter(a => a.date === getToday() && a.status === 'approved').length
+                };
+            } else {
+                stats = {
+                    total: apts.length,
+                    pending: apts.filter(a => a.status === 'pending').length,
+                    approved: apts.filter(a => a.status === 'approved').length,
+                    teachers: DB.getTeachers().length
+                };
+            }
+
+            const todayApts = apts.filter(a => {
+                if (currentUser.role === 'veli') return a.parentName === currentUser.name && a.date === getToday();
+                if (currentUser.role === 'ogretmen') return a.teacherId === currentUser.teacherId && a.date === getToday();
+                return a.date === getToday();
+            });
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📊 Kontrol Paneli</h2>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📋</div>
+                        <div class="stat-info">
+                            <h3>${stats.total}</h3>
+                            <p>Toplam Randevu</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">⏳</div>
+                        <div class="stat-info">
+                            <h3>${stats.pending}</h3>
+                            <p>Bekleyen</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">✅</div>
+                        <div class="stat-info">
+                            <h3>${stats.approved}</h3>
+                            <p>Onaylanan</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">${currentUser.role === 'yonetici' ? '👩‍🏫' : '📅'}</div>
+                        <div class="stat-info">
+                            <h3>${currentUser.role === 'yonetici' ? stats.teachers : (currentUser.role === 'ogretmen' ? stats.today : stats.upcoming)}</h3>
+                            <p>${currentUser.role === 'yonetici' ? 'Öğretmen Sayısı' : (currentUser.role === 'ogretmen' ? 'Bugünkü Randevu' : 'Yaklaşan Randevu')}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3>📅 Bugünkü Randevular</h3>
+                    ${todayApts.length > 0 ? `
+                        <ul class="appointment-list">
+                            ${todayApts.map(a => renderAppointmentItem(a)).join('')}
+                        </ul>
+                    ` : `
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>Bugün için randevu bulunmuyor</p>
+                        </div>
+                    `}
+                </div>
+
+                ${currentUser.role === 'veli' ? `
+                    <div style="text-align:center; margin-top:20px;">
+                        <button class="btn-primary" style="width:auto; padding:15px 40px;" onclick="navigateTo('newAppointment')">
+                            ➕ Yeni Randevu Oluştur
+                        </button>
+                    </div>
+                ` : ''}
+            `;
+        }
+
+        // ============ YENİ RANDEVU (VELİ) ============
+        function renderNewAppointment(container) {
+            currentStep = 1;
+            selectedTeacher = null;
+            selectedDate = null;
+            selectedTime = null;
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>➕ Yeni Randevu Oluştur</h2>
+                </div>
+
+                <div class="card">
+                    <div class="step-indicator">
+                        <div class="step active" id="step1">
+                            <div class="step-number">1</div>
+                            <div class="step-text">Öğretmen Seç</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" id="step2">
+                            <div class="step-number">2</div>
+                            <div class="step-text">Tarih & Saat</div>
+                        </div>
+                        <div class="step-line"></div>
+                        <div class="step" id="step3">
+                            <div class="step-number">3</div>
+                            <div class="step-text">Onayla</div>
+                        </div>
+                    </div>
+
+                    <div id="appointmentStepContent">
+                        <!-- Adım içeriği -->
+                    </div>
+                </div>
+            `;
+
+            renderStep1();
+        }
+
+        function renderStep1() {
+            currentStep = 1;
+            updateStepIndicator();
+
+            const teachers = DB.getTeachers();
+            const content = document.getElementById('appointmentStepContent');
+
+            content.innerHTML = `
+                <h3>👩‍🏫 Görüşmek istediğiniz öğretmeni seçiniz</h3>
+                <div class="search-box">
+                    <input type="text" placeholder="Öğretmen ara..." oninput="filterTeachers(this.value)">
+                </div>
+                <div class="teacher-grid" id="teacherGrid">
+                    ${teachers.map(t => `
+                        <div class="teacher-card ${selectedTeacher && selectedTeacher.id === t.id ? 'selected' : ''}"
+                             onclick="selectTeacher(${t.id})">
+                            <div class="teacher-avatar">${t.name.charAt(0)}</div>
+                            <div class="teacher-info">
+                                <h4>${t.name}</h4>
+                                <p>${t.branch}</p>
+                                <p style="font-size:0.8em;">Sınıflar: ${t.class}</p>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function filterTeachers(query) {
+            const teachers = DB.getTeachers();
+            const filtered = teachers.filter(t =>
+                t.name.toLowerCase().includes(query.toLowerCase()) ||
+                t.branch.toLowerCase().includes(query.toLowerCase())
+            );
+            const grid = document.getElementById('teacherGrid');
+            grid.innerHTML = filtered.map(t => `
+                <div class="teacher-card ${selectedTeacher && selectedTeacher.id === t.id ? 'selected' : ''}"
+                     onclick="selectTeacher(${t.id})">
+                    <div class="teacher-avatar">${t.name.charAt(0)}</div>
+                    <div class="teacher-info">
+                        <h4>${t.name}</h4>
+                        <p>${t.branch}</p>
+                        <p style="font-size:0.8em;">Sınıflar: ${t.class}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectTeacher(id) {
+            selectedTeacher = DB.getTeachers().find(t => t.id === id);
+            renderStep2();
+        }
+
+        function renderStep2() {
+            currentStep = 2;
+            updateStepIndicator();
+
+            const content = document.getElementById('appointmentStepContent');
+            content.innerHTML = `
+                <div style="margin-bottom:15px;">
+                    <button class="btn-secondary" onclick="renderStep1()" style="width:auto;">← Geri</button>
+                    <span style="margin-left:15px; color:#555; font-weight:600;">
+                        Seçilen: ${selectedTeacher.name} (${selectedTeacher.branch})
+                    </span>
+                </div>
+                <div class="calendar-wrapper">
+                    <div class="calendar" id="calendarContainer"></div>
+                    <div class="time-slots" id="timeSlotsContainer">
+                        <h3>🕐 Saat Seçiniz</h3>
+                        <p style="color:#888;">Önce bir tarih seçiniz</p>
+                    </div>
+                </div>
+            `;
+
+            renderCalendar();
+        }
+
+        function renderStep3() {
+            currentStep = 3;
+            updateStepIndicator();
+
+            const content = document.getElementById('appointmentStepContent');
+            const dateObj = new Date(selectedDate);
+            const dayNames = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+            const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+
+            content.innerHTML = `
+                <div style="margin-bottom:15px;">
+                    <button class="btn-secondary" onclick="renderStep2()" style="width:auto;">← Geri</button>
+                </div>
+                <h3>✅ Randevu Özeti</h3>
+                <div style="background:#f8f9fa; border-radius:12px; padding:25px; margin:20px 0;">
+                    <div class="summary-row">
+                        <span class="summary-label">Öğretmen</span>
+                        <span class="summary-value">${selectedTeacher.name}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Branş</span>
+                        <span class="summary-value">${selectedTeacher.branch}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Tarih</span>
+                        <span class="summary-value">${dateObj.getDate()} ${monthNames[dateObj.getMonth()]} ${dateObj.getFullYear()}, ${dayNames[dateObj.getDay()]}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Saat</span>
+                        <span class="summary-value">${selectedTime}</span>
+                    </div>
+                    <div class="summary-row">
+                        <span class="summary-label">Öğrenci</span>
+                        <span class="summary-value">${currentUser.studentName} (${currentUser.studentClass})</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Görüşme Konusu</label>
+                    <select id="appointmentSubject">
+                        <option value="">Konu Seçiniz</option>
+                        <option value="Ders Başarısı">Ders Başarısı</option>
+                        <option value="Davranış">Davranış</option>
+                        <option value="Devamsızlık">Devamsızlık</option>
+                        <option value="Sosyal Gelişim">Sosyal Gelişim</option>
+                        <option value="Rehberlik">Rehberlik</option>
+                        <option value="Diğer">Diğer</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Not (İsteğe Bağlı)</label>
+                    <textarea id="appointmentNote" placeholder="Görüşme ile ilgili eklemek istediğiniz notları yazabilirsiniz..."></textarea>
+                </div>
+                <button class="btn-primary" onclick="confirmAppointment()">
+                    ✅ Randevuyu Onayla
+                </button>
+            `;
+        }
+
+        function updateStepIndicator() {
+            for (let i = 1; i <= 3; i++) {
+                const step = document.getElementById('step' + i);
+                if (!step) continue;
+                step.className = 'step';
+                if (i < currentStep) step.classList.add('completed');
+                if (i === currentStep) step.classList.add('active');
+            }
+        }
+
+        function confirmAppointment() {
+            const subject = document.getElementById('appointmentSubject').value;
+            if (!subject) {
+                showNotification('Lütfen görüşme konusunu seçiniz', 'error');
+                return;
+            }
+
+            const note = document.getElementById('appointmentNote').value;
+
+            DB.saveAppointment({
+                teacherId: selectedTeacher.id,
+                teacherName: selectedTeacher.name,
+                teacherBranch: selectedTeacher.branch,
+                parentName: currentUser.name,
+                studentName: currentUser.studentName,
+                studentClass: currentUser.studentClass,
+                date: selectedDate,
+                time: selectedTime,
+                subject: subject,
+                note: note,
+                status: 'pending'
+            });
+
+            showNotification('Randevu talebiniz başarıyla oluşturuldu!', 'success');
+            navigateTo('myAppointments');
+        }
+
+        // ============ TAKVİM ============
+        function renderCalendar() {
+            const calContainer = document.getElementById('calendarContainer');
+            const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+            const dayNames = ['Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt', 'Paz'];
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            let startDay = firstDay.getDay() - 1;
+            if (startDay < 0) startDay = 6;
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+
+            const aptDates = DB.getAppointments()
+                .filter(a => selectedTeacher ? a.teacherId === selectedTeacher.id : true)
+                .map(a => a.date);
+
+            let daysHTML = dayNames.map(d => `<div class="calendar-day-name">${d}</div>`).join('');
+
+            for (let i = 0; i < startDay; i++) {
+                daysHTML += `<div class="calendar-day empty"></div>`;
+            }
+
+            for (let day = 1; day <= lastDay.getDate(); day++) {
+                const dateStr = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dateObj = new Date(currentYear, currentMonth, day);
+                const isToday = dateObj.getTime() === today.getTime();
+                const isPast = dateObj < today;
+                const isSelected = selectedDate === dateStr;
+                const isWeekend = dateObj.getDay() === 0 || dateObj.getDay() === 6;
+                const hasApt = aptDates.includes(dateStr);
+
+                let classes = 'calendar-day';
+                if (isToday) classes += ' today';
+                if (isSelected) classes += ' selected';
+                if (isPast) classes += ' past';
+                if (hasApt) classes += ' has-appointment';
+
+                if (isPast || isWeekend) {
+                    daysHTML += `<div class="${classes}" style="${isWeekend && !isPast ? 'color:#ccc;cursor:not-allowed;' : ''}">${day}</div>`;
+                } else {
+                    daysHTML += `<div class="${classes}" onclick="selectDate('${dateStr}')">${day}</div>`;
+                }
+            }
+
+            calContainer.innerHTML = `
+                <div class="calendar-header">
+                    <h3>${monthNames[currentMonth]} ${currentYear}</h3>
+                    <div class="calendar-nav">
+                        <button onclick="changeMonth(-1)">◀</button>
+                        <button onclick="changeMonth(1)">▶</button>
+                    </div>
+                </div>
+                <div class="calendar-grid">${daysHTML}</div>
+            `;
+        }
+
+        function changeMonth(dir) {
+            currentMonth += dir;
+            if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+            if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+            renderCalendar();
+        }
+
+        function selectDate(dateStr) {
+            selectedDate = dateStr;
+            selectedTime = null;
+            renderCalendar();
+            renderTimeSlots();
+        }
+
+        function renderTimeSlots() {
+            const container = document.getElementById('timeSlotsContainer');
+            const allSlots = ['08:30', '09:00', '09:30', '10:00', '10:30', '11:00',
+                              '11:30', '13:00', '13:30', '14:00', '14:30', '15:00',
+                              '15:30', '16:00', '16:30'];
+
+            const takenSlots = DB.getAppointments()
+                .filter(a => a.teacherId === selectedTeacher.id && a.date === selectedDate && a.status !== 'rejected')
+                .map(a => a.time);
+
+            const blockedSlots = DB.getBlockedSlots()
+                .filter(s => s.teacherId === selectedTeacher.id && s.date === selectedDate)
+                .map(s => s.time);
+
+            const unavailable = [...takenSlots, ...blockedSlots];
+
+            const dateObj = new Date(selectedDate);
+            const dayNames = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
+            const monthNames = ['Ocak', 'Şubat', 'Mart', 'Nisan', 'Mayıs', 'Haziran',
+                                'Temmuz', 'Ağustos', 'Eylül', 'Ekim', 'Kasım', 'Aralık'];
+
+            container.innerHTML = `
+                <h3>🕐 ${dateObj.getDate()} ${monthNames[dateObj.getMonth()]} ${dayNames[dateObj.getDay()]}</h3>
+                <p style="color:#888; margin-bottom:15px; font-size:0.9em;">Müsait saatleri seçiniz (üzeri çizili saatler doludur)</p>
+                <div class="slots-grid">
+                    ${allSlots.map(slot => {
+                        const isTaken = unavailable.includes(slot);
+                        const isSelected = selectedTime === slot;
+                        return `<div class="time-slot ${isTaken ? 'taken' : ''} ${isSelected ? 'selected' : ''}"
+                                     onclick="${isTaken ? '' : `selectTime('${slot}')`}">${slot}</div>`;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        function selectTime(time) {
+            selectedTime = time;
+            renderTimeSlots();
+            setTimeout(() => renderStep3(), 300);
+        }
+
+        // ============ VELİ RANDEVULARİM ============
+        function renderMyAppointments(container) {
+            const apts = DB.getAppointments().filter(a => a.parentName === currentUser.name);
+            const sorted = apts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📋 Randevularım</h2>
+                    <button class="btn-success" onclick="navigateTo('newAppointment')">➕ Yeni Randevu</button>
+                </div>
+
+                <div class="card">
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="filterAppointments('all', this)">Tümü (${sorted.length})</button>
+                        <button class="tab-btn" onclick="filterAppointments('pending', this)">Bekleyen (${sorted.filter(a=>a.status==='pending').length})</button>
+                        <button class="tab-btn" onclick="filterAppointments('approved', this)">Onaylı (${sorted.filter(a=>a.status==='approved').length})</button>
+                        <button class="tab-btn" onclick="filterAppointments('rejected', this)">Reddedilen (${sorted.filter(a=>a.status==='rejected').length})</button>
+                    </div>
+
+                    ${sorted.length > 0 ? `
+                        <ul class="appointment-list" id="appointmentListItems">
+                            ${sorted.map(a => renderAppointmentItem(a, true)).join('')}
+                        </ul>
+                    ` : `
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>Henüz randevunuz bulunmuyor</p>
+                            <button class="btn-primary" style="width:auto; margin-top:15px;" onclick="navigateTo('newAppointment')">
+                                İlk Randevunuzu Oluşturun
+                            </button>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function filterAppointments(status, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let apts = DB.getAppointments().filter(a => a.parentName === currentUser.name);
+            if (status !== 'all') apts = apts.filter(a => a.status === status);
+            apts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const listEl = document.getElementById('appointmentListItems');
+            if (listEl) {
+                listEl.innerHTML = apts.length > 0 ?
+                    apts.map(a => renderAppointmentItem(a, true)).join('') :
+                    `<div class="empty-state"><div class="empty-icon">📭</div><p>Bu kategoride randevu yok</p></div>`;
+            }
+        }
+
+        // ============ ÖĞRETMEN GELEN RANDEVULAR ============
+        function renderIncomingAppointments(container) {
+            const apts = DB.getAppointments()
+                .filter(a => a.teacherId === currentUser.teacherId)
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📥 Gelen Randevu Talepleri</h2>
+                </div>
+
+                <div class="card">
+                    <div class="tabs">
+                        <button class="tab-btn active" onclick="filterTeacherApts('all', this)">Tümü (${apts.length})</button>
+                        <button class="tab-btn" onclick="filterTeacherApts('pending', this)">Bekleyen (${apts.filter(a=>a.status==='pending').length})</button>
+                        <button class="tab-btn" onclick="filterTeacherApts('approved', this)">Onaylı (${apts.filter(a=>a.status==='approved').length})</button>
+                    </div>
+
+                    ${apts.length > 0 ? `
+                        <ul class="appointment-list" id="teacherAptList">
+                            ${apts.map(a => renderTeacherAppointmentItem(a)).join('')}
+                        </ul>
+                    ` : `
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>Henüz randevu talebi bulunmuyor</p>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        function filterTeacherApts(status, btn) {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            let apts = DB.getAppointments().filter(a => a.teacherId === currentUser.teacherId);
+            if (status !== 'all') apts = apts.filter(a => a.status === status);
+            apts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            const listEl = document.getElementById('teacherAptList');
+            if (listEl) {
+                listEl.innerHTML = apts.length > 0 ?
+                    apts.map(a => renderTeacherAppointmentItem(a)).join('') :
+                    `<div class="empty-state"><div class="empty-icon">📭</div><p>Bu kategoride randevu yok</p></div>`;
+            }
+        }
+
+        function renderTeacherAppointmentItem(a) {
+            const dateObj = new Date(a.date);
+            const monthNames = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+            const statusTexts = { pending: 'Beklemede', approved: 'Onaylandı', rejected: 'Reddedildi', completed: 'Tamamlandı' };
+
+            return `
+                <li class="appointment-item" data-status="${a.status}">
+                    <div class="appointment-info">
+                        <div class="appointment-date-badge">
+                            <div class="day">${dateObj.getDate()}</div>
+                            <div class="month">${monthNames[dateObj.getMonth()]}</div>
+                        </div>
+                        <div class="appointment-details">
+                            <h4>${a.parentName} - ${a.studentName} (${a.studentClass})</h4>
+                            <p>🕐 ${a.time} | 📌 ${a.subject}</p>
+                            ${a.note ? `<p style="font-size:0.85em; color:#999;">📝 ${a.note}</p>` : ''}
+                        </div>
+                    </div>
+                    <div class="appointment-actions">
+                        <span class="status-badge ${a.status}">${statusTexts[a.status]}</span>
+                        ${a.status === 'pending' ? `
+                            <button class="btn-success" onclick="updateAptStatus(${a.id}, 'approved')" style="padding:8px 16px; font-size:0.85em;">✅ Onayla</button>
+                            <button class="btn-danger" onclick="updateAptStatus(${a.id}, 'rejected')">❌ Reddet</button>
+                        ` : ''}
+                        ${a.status === 'approved' ? `
+                            <button class="btn-warning" onclick="updateAptStatus(${a.id}, 'completed')">✔ Tamamla</button>
+                        ` : ''}
+                    </div>
+                </li>
+            `;
+        }
+
+        function updateAptStatus(id, status) {
+            const statusTexts = { approved: 'onaylandı', rejected: 'reddedildi', completed: 'tamamlandı' };
+            DB.updateAppointment(id, { status: status });
+            showNotification(`Randevu ${statusTexts[status]}!`, status === 'rejected' ? 'error' : 'success');
+
+            if (currentPage === 'incomingAppointments') {
+                renderIncomingAppointments(document.getElementById('mainContent'));
+            } else if (currentPage === 'allAppointments') {
+                renderAllAppointments(document.getElementById('mainContent'));
+            } else {
+                navigateTo(currentPage);
+            }
+        }
+
+        // ============ ÖĞRETMEN MÜSAİTLİK ============
+        function renderSchedule(container) {
+            currentMonth = new Date().getMonth();
+            currentYear = new Date().getFullYear();
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📅 Müsaitlik Takvimi</h2>
+                </div>
+                <div class="card">
+                    <p style="color:#888; margin-bottom:20px;">Müsait olmadığınız saatleri kapatmak için tarih seçip ilgili saatlere tıklayınız.</p>
+                    <div class="calendar-wrapper">
+                        <div class="calendar" id="calendarContainer"></div>
+                        <div class="time-slots" id="timeSlotsContainer">
+                            <h3>🕐 Müsaitlik Durumu</h3>
+                            <p style="color:#888;">Tarih seçerek müsaitlik durumunuzu düzenleyebilirsiniz</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            selectedTeacher = { id: currentUser.teacherId };
+            renderCalendar();
+        }
+
+        // ============ YÖNETİCİ - TÜM RANDEVULAR ============
+        function renderAllAppointments(container) {
+            const apts = DB.getAppointments().sort((a, b) => new Date(b.date) - new Date(a.date));
+            const teachers = DB.getTeachers();
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📋 Tüm Randevular</h2>
+                </div>
+                <div class="card">
+                    <div class="filter-row">
+                        <select onchange="filterAllApts()" id="filterTeacher">
+                            <option value="">Tüm Öğretmenler</option>
+                            ${teachers.map(t => `<option value="${t.id}">${t.name} (${t.branch})</option>`).join('')}
+                        </select>
+                        <select onchange="filterAllApts()" id="filterStatus">
+                            <option value="">Tüm Durumlar</option>
+                            <option value="pending">Beklemede</option>
+                            <option value="approved">Onaylanmış</option>
+                            <option value="rejected">Reddedilmiş</option>
+                            <option value="completed">Tamamlanmış</option>
+                        </select>
+                        <input type="date" onchange="filterAllApts()" id="filterDate" style="padding:10px 16px; border:2px solid #e0e0e0; border-radius:10px; font-size:0.95em;">
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" placeholder="Veli veya öğrenci adı ara..." oninput="filterAllApts()" id="filterSearch">
+                    </div>
+
+                    <ul class="appointment-list" id="allAptsList">
+                        ${apts.map(a => renderTeacherAppointmentItem(a)).join('')}
+                    </ul>
+
+                    ${apts.length === 0 ? `
+                        <div class="empty-state">
+                            <div class="empty-icon">📭</div>
+                            <p>Kayıtlı randevu bulunmuyor</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function filterAllApts() {
+            const teacherFilter = document.getElementById('filterTeacher').value;
+            const statusFilter = document.getElementById('filterStatus').value;
+            const dateFilter = document.getElementById('filterDate').value;
+            const searchFilter = document.getElementById('filterSearch').value.toLowerCase();
+
+            let apts = DB.getAppointments();
+
+            if (teacherFilter) apts = apts.filter(a => a.teacherId == teacherFilter);
+            if (statusFilter) apts = apts.filter(a => a.status === statusFilter);
+            if (dateFilter) apts = apts.filter(a => a.date === dateFilter);
+            if (searchFilter) apts = apts.filter(a =>
+                a.parentName.toLowerCase().includes(searchFilter) ||
+                a.studentName.toLowerCase().includes(searchFilter)
+            );
+
+            apts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+            const list = document.getElementById('allAptsList');
+            list.innerHTML = apts.length > 0 ?
+                apts.map(a => renderTeacherAppointmentItem(a)).join('') :
+                `<div class="empty-state"><div class="empty-icon">🔍</div><p>Filtrelere uygun randevu bulunamadı</p></div>`;
+        }
+
+        // ============ YÖNETİCİ - ÖĞRETMENLER ============
+        function renderTeachers(container) {
+            const teachers = DB.getTeachers();
+            const apts = DB.getAppointments();
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>👩‍🏫 Öğretmen Listesi</h2>
+                </div>
+                <div class="card">
+                    <div class="teacher-grid">
+                        ${teachers.map(t => {
+                            const teacherApts = apts.filter(a => a.teacherId === t.id);
+                            const pending = teacherApts.filter(a => a.status === 'pending').length;
+                            const approved = teacherApts.filter(a => a.status === 'approved').length;
+                            return `
+                                <div class="teacher-card">
+                                    <div class="teacher-avatar">${t.name.charAt(0)}</div>
+                                    <div class="teacher-info">
+                                        <h4>${t.name}</h4>
+                                        <p>${t.branch}</p>
+                                        <p style="font-size:0.8em; color:#999;">Sınıflar: ${t.class}</p>
+                                        <p style="font-size:0.8em; margin-top:5px;">
+                                            <span style="color:#f39c12;">⏳ ${pending} bekleyen</span> |
+                                            <span style="color:#27ae60;">✅ ${approved} onaylı</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============ YÖNETİCİ - RAPORLAR ============
+        function renderReports(container) {
+            const apts = DB.getAppointments();
+            const teachers = DB.getTeachers();
+
+            const totalApts = apts.length;
+            const pendingApts = apts.filter(a => a.status === 'pending').length;
+            const approvedApts = apts.filter(a => a.status === 'approved').length;
+            const rejectedApts = apts.filter(a => a.status === 'rejected').length;
+            const completedApts = apts.filter(a => a.status === 'completed').length;
+
+            // Konu dağılımı
+            const subjects = {};
+            apts.forEach(a => {
+                subjects[a.subject] = (subjects[a.subject] || 0) + 1;
+            });
+
+            // Öğretmen bazlı
+            const teacherStats = teachers.map(t => {
+                const tApts = apts.filter(a => a.teacherId === t.id);
+                return { ...t, total: tApts.length, pending: tApts.filter(a => a.status === 'pending').length };
+            }).sort((a, b) => b.total - a.total);
+
+            container.innerHTML = `
+                <div class="section-header">
+                    <h2>📈 Raporlar</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue">📋</div>
+                        <div class="stat-info">
+                            <h3>${totalApts}</h3>
+                            <p>Toplam Randevu</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange">⏳</div>
+                        <div class="stat-info">
+                            <h3>${pendingApts}</h3>
+                            <p>Beklemede</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green">✅</div>
+                        <div class="stat-info">
+                            <h3>${approvedApts + completedApts}</h3>
+                            <p>Onaylanan/Tamamlanan</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red">❌</div>
+                        <div class="stat-info">
+                            <h3>${rejectedApts}</h3>
+                            <p>Reddedilen</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:25px;">
+                    <div class="card">
+                        <h3>📌 Konu Dağılımı</h3>
+                        ${Object.keys(subjects).length > 0 ? Object.entries(subjects)
+                            .sort((a, b) => b[1] - a[1])
+                            .map(([key, val]) => `
+                                <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                                    <span style="font-weight:600; color:#555;">${key}</span>
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <div style="width:${Math.max(val/totalApts*200, 20)}px; height:8px; background:linear-gradient(135deg,#667eea,#764ba2); border-radius:4px;"></div>
+                                        <span style="font-weight:700; color:#4a3f8a;">${val}</span>
+                                    </div>
+                                </div>
+                            `).join('') : '<p style="color:#888;">Henüz veri yok</p>'}
+                    </div>
+
+                    <div class="card">
+                        <h3>👩‍🏫 Öğretmen Bazlı Randevu</h3>
+                        ${teacherStats.map(t => `
+                            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid #f0f0f0;">
+                                <div>
+                                    <span style="font-weight:600; color:#555;">${t.name}</span>
+                                    <span style="font-size:0.8em; color:#999; margin-left:5px;">(${t.branch})</span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:10px;">
+                                    <div style="width:${Math.max(t.total/(teacherStats[0]?.total||1)*150, 10)}px; height:8px; background:linear-gradient(135deg,#2ecc71,#27ae60); border-radius:4px;"></div>
+                                    <span style="font-weight:700; color:#27ae60;">${t.total}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+        }
+
+        // ============ ORTAK RENDER FONKSİYONLARI ============
+        function renderAppointmentItem(a, showActions = false) {
+            const dateObj = new Date(a.date);
+            const monthNames = ['Oca', 'Şub', 'Mar', 'Nis', 'May', 'Haz', 'Tem', 'Ağu', 'Eyl', 'Eki', 'Kas', 'Ara'];
+            const statusTexts = { pending: 'Beklemede', approved: 'Onaylandı', rejected: 'Reddedildi', completed: 'Tamamlandı' };
+
+            return `
+                <li class="appointment-item" data-status="${a.status}">
+                    <div class="appointment-info">
+                        <div class="appointment-date-badge">
+                            <div class="day">${dateObj.getDate()}</div>
+                            <div class="month">${monthNames[dateObj.getMonth()]}</div>
+                        </div>
+                        <div class="appointment-details">
+                            <h4>${a.teacherName} - ${a.teacherBranch}</h4>
+                            <p>🕐 ${a.time} | 📌 ${a.subject}</p>
+                            ${a.note ? `<p style="font-size:0.85em; color:#999;">📝 ${a.note}</p>` : ''}
+                        </div>
+                    </div>
+                    <div class="appointment-actions">
+                        <span class="status-badge ${a.status}">${statusTexts[a.status]}</span>
+                        ${showActions && a.status === 'pending' ? `
+                            <button class="btn-danger" onclick="cancelAppointment(${a.id})">İptal Et</button>
+                        ` : ''}
+                    </div>
+                </li>
+            `;
+        }
+
+        function cancelAppointment(id) {
+            if (confirm('Bu randevuyu iptal etmek istediğinize emin misiniz?')) {
+                DB.deleteAppointment(id);
+                showNotification('Randevu iptal edildi', 'info');
+                navigateTo('myAppointments');
+            }
+        }
+
+        // ============ YARDIMCI FONKSİYONLAR ============
+        function getToday() {
+            const d = new Date();
+            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        function showNotification(msg, type = 'info') {
+            const existing = document.querySelector('.notification');
+            if (existing) existing.remove();
+
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            notif.textContent = msg;
+            document.body.appendChild(notif);
+            setTimeout(() => notif.remove(), 3500);
+        }
+
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('modalOverlay')) {
+                document.getElementById('modalOverlay').classList.remove('show');
+            }
+        }
+
+        // ============ DEMO VERİ OLUŞTUR ============
+        function initDemoData() {
+            if (localStorage.getItem('demoInitialized')) return;
+
+            const today = new Date();
+            const demoAppointments = [
+                {
+                    id: 1001,
+                    teacherId: 1, teacherName: 'Ayşe Yılmaz', teacherBranch: 'Matematik',
+                    parentName: 'Ahmet Yıldız', studentName: 'Ece Yıldız', studentClass: '5-A',
+                    date: getToday(), time: '10:00', subject: 'Ders Başarısı',
+                    note: 'Matematik notlarındaki düşüş hakkında görüşmek istiyorum.',
+                    status: 'approved', createdAt: new Date().toISOString()
+                },
+                {
+                    id: 1002,
+                    teacherId: 2, teacherName: 'Mehmet Kaya', teacherBranch: 'Türkçe',
+                    parentName: 'Ahmet Yıldız', studentName: 'Ece Yıldız', studentClass: '5-A',
+                    date: getFutureDate(2), time: '14:00', subject: 'Sosyal Gelişim',
+                    note: '', status: 'pending', createdAt: new Date().toISOString()
+                },
+                {
+                    id: 1003,
+                    teacherId: 1, teacherName: 'Ayşe Yılmaz', teacherBranch: 'Matematik',
+                    parentName: 'Fatma Şen', studentName: 'Can Şen', studentClass: '5-A',
+                    date: getToday(), time: '11:00', subject: 'Davranış',
+                    note: 'Can\'ın sınıf içi davranışları hakkında bilgi almak istiyorum.',
+                    status: 'approved', createdAt: new Date().toISOString()
+                },
+                {
+                    id: 1004,
+                    teacherId: 3, teacherName: 'Fatma Demir', teacherBranch: 'Fen Bilimleri',
+                    parentName: 'Mustafa Ak', studentName: 'Zeynep Ak', studentClass: '6-A',
+                    date: getFutureDate(1), time: '09:30', subject: 'Ders Başarısı',
+                    note: '', status: 'pending', createdAt: new Date().toISOString()
+                },
+                {
+                    id: 1005,
+                    teacherId: 8, teacherName: 'Emre Koç', teacherBranch: 'Rehberlik',
+                    parentName: 'Ahmet Yıldız', studentName: 'Ece Yıldız', studentClass: '5-A',
+                    date: getFutureDate(5), time: '13:30', subject: 'Rehberlik',
+                    note: 'Kariyer planlaması hakkında destek almak istiyoruz.',
+                    status: 'pending', createdAt: new Date().toISOString()
+                }
+            ];
+
+            localStorage.setItem('appointments', JSON.stringify(demoAppointments));
+            localStorage.setItem('demoInitialized', 'true');
+        }
+
+        function getFutureDate(daysAhead) {
+            const d = new Date();
+            d.setDate(d.getDate() + daysAhead);
+            // Haftasonuna denk geliyorsa pazartesiye kaydır
+            while (d.getDay() === 0 || d.getDay() === 6) {
+                d.setDate(d.getDate() + 1);
+            }
+            return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+        }
+
+        // ============ BAŞLANGIÇ ============
+        initDemoData();
+    </script>
+</body>
+</html>
