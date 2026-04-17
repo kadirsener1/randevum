@@ -7,15 +7,11 @@
     <style>
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh}
-
-        /* LOADER */
         .loader-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
         .loader-overlay.hidden{display:none}
         .spinner{width:50px;height:50px;border:4px solid #e0e0e0;border-top-color:#667eea;border-radius:50%;animation:spin 0.8s linear infinite}
         @keyframes spin{to{transform:rotate(360deg)}}
         .loader-text{margin-top:15px;color:#555;font-weight:600}
-
-        /* NAVBAR */
         .navbar{background:rgba(255,255,255,0.97);backdrop-filter:blur(10px);padding:12px 25px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 2px 20px rgba(0,0,0,0.1);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:10px}
         .logo{display:flex;align-items:center;gap:10px;font-size:1.3em;font-weight:700;color:#4a3f8a}
         .logo span{font-size:1.6em}
@@ -28,11 +24,7 @@
         .user-role-label{font-size:0.75em;color:#888}
         .logout-btn{padding:7px 14px;border:2px solid #e74c3c;background:transparent;color:#e74c3c;border-radius:8px;cursor:pointer;font-weight:600;transition:all 0.3s;font-size:0.85em}
         .logout-btn:hover{background:#e74c3c;color:#fff}
-
-        /* CONTAINER */
         .container{max-width:1200px;margin:0 auto;padding:25px 20px}
-
-        /* LOGIN / REGISTER */
         .auth-container{display:flex;justify-content:center;align-items:center;min-height:calc(100vh - 70px);padding:20px}
         .auth-box{background:#fff;border-radius:20px;padding:45px 35px;width:100%;max-width:480px;box-shadow:0 20px 60px rgba(0,0,0,0.15)}
         .auth-box h2{text-align:center;color:#4a3f8a;margin-bottom:8px;font-size:1.7em}
@@ -40,23 +32,18 @@
         .auth-tabs{display:flex;margin-bottom:25px;border-radius:12px;overflow:hidden;border:2px solid #e0e0e0}
         .auth-tab{flex:1;padding:12px;border:none;background:#fff;font-weight:700;font-size:0.95em;cursor:pointer;transition:all 0.3s;color:#888}
         .auth-tab.active{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
-
-        /* FORM */
         .form-group{margin-bottom:18px}
         .form-group label{display:block;margin-bottom:6px;color:#555;font-weight:600;font-size:0.88em}
         .form-group input,.form-group select,.form-group textarea{width:100%;padding:11px 15px;border:2px solid #e0e0e0;border-radius:10px;font-size:0.95em;transition:border-color 0.3s;outline:none;font-family:inherit}
         .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:#667eea}
         .form-group textarea{resize:vertical;min-height:70px}
         .form-row{display:grid;grid-template-columns:1fr 1fr;gap:15px}
-
         .role-selector{display:flex;gap:8px;margin-bottom:20px}
         .role-btn{flex:1;padding:14px 8px;border:2px solid #e0e0e0;background:#fff;border-radius:12px;cursor:pointer;text-align:center;transition:all 0.3s}
         .role-btn:hover{border-color:#667eea}
         .role-btn.active{border-color:#667eea;background:linear-gradient(135deg,rgba(102,126,234,0.08),rgba(118,75,162,0.08))}
         .role-icon{font-size:1.8em;margin-bottom:4px}
         .role-text{font-weight:600;color:#555;font-size:0.85em}
-
-        /* BUTTONS */
         .btn-primary{width:100%;padding:13px;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;border:none;border-radius:10px;font-size:1.05em;font-weight:600;cursor:pointer;transition:transform 0.3s,box-shadow 0.3s}
         .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(102,126,234,0.4)}
         .btn-primary:disabled{opacity:0.6;cursor:not-allowed;transform:none;box-shadow:none}
@@ -68,8 +55,6 @@
         .btn-danger:hover{transform:translateY(-1px)}
         .btn-warning{padding:7px 14px;background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;border:none;border-radius:8px;font-size:0.82em;font-weight:600;cursor:pointer;transition:all 0.3s}
         .btn-sm{padding:6px 12px;font-size:0.8em;border-radius:6px}
-
-        /* STATS */
         .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:18px;margin-bottom:25px}
         .stat-card{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 15px rgba(0,0,0,0.06);display:flex;align-items:center;gap:14px;transition:transform 0.3s}
         .stat-card:hover{transform:translateY(-3px)}
@@ -80,14 +65,10 @@
         .stat-icon.red{background:linear-gradient(135deg,#e74c3c,#c0392b)}
         .stat-info h3{font-size:1.6em;color:#333}
         .stat-info p{color:#888;font-size:0.85em}
-
-        /* CARD */
         .card{background:#fff;border-radius:14px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,0.06);margin-bottom:22px}
         .card h3{color:#4a3f8a;margin-bottom:18px;font-size:1.2em;display:flex;align-items:center;gap:8px}
         .section-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px;flex-wrap:wrap;gap:10px}
         .section-header h2{color:#fff;font-size:1.6em;text-shadow:0 2px 10px rgba(0,0,0,0.2)}
-
-        /* CALENDAR */
         .calendar-wrapper{display:grid;grid-template-columns:1fr 1fr;gap:22px}
         .calendar{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
         .calendar-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
@@ -106,8 +87,6 @@
         .calendar-day.empty{cursor:default}
         .calendar-day.past{color:#ccc;cursor:not-allowed}
         .calendar-day.weekend{color:#ddd;cursor:not-allowed}
-
-        /* TIME SLOTS */
         .time-slots{background:#fff;border-radius:14px;padding:22px;box-shadow:0 4px 15px rgba(0,0,0,0.06)}
         .time-slots h3{color:#4a3f8a;margin-bottom:15px;font-size:1.15em}
         .slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
@@ -116,9 +95,6 @@
         .time-slot.selected{border-color:#667eea;background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
         .time-slot.taken{background:#fff0f0;color:#e74c3c;cursor:not-allowed;border-color:#ffcdd2}
         .time-slot.blocked{background:#f5f5f5;color:#bbb;cursor:not-allowed;border-color:#e0e0e0;text-decoration:line-through}
-        .time-slot.teacher-blocked{background:#fff3e0;color:#f39c12;border-color:#ffe0b2;cursor:pointer;text-decoration:none}
-
-        /* APPOINTMENT LIST */
         .appointment-list{list-style:none}
         .appointment-item{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border:2px solid #f0f0f0;border-radius:12px;margin-bottom:10px;transition:all 0.3s;flex-wrap:wrap;gap:10px}
         .appointment-item:hover{border-color:#667eea;box-shadow:0 3px 12px rgba(102,126,234,0.1)}
@@ -129,14 +105,11 @@
         .apt-details h4{color:#333;margin-bottom:3px;font-size:0.95em}
         .apt-details p{color:#888;font-size:0.85em}
         .apt-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
-
         .status-badge{padding:5px 12px;border-radius:20px;font-size:0.75em;font-weight:600}
         .status-badge.pending{background:#fff3e0;color:#f39c12}
         .status-badge.approved{background:#e8f5e9;color:#27ae60}
         .status-badge.rejected{background:#ffebee;color:#e74c3c}
         .status-badge.completed{background:#e3f2fd;color:#2196f3}
-
-        /* TEACHER GRID */
         .teacher-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px}
         .teacher-card{border:2px solid #f0f0f0;border-radius:12px;padding:18px;display:flex;align-items:center;gap:14px;cursor:pointer;transition:all 0.3s}
         .teacher-card:hover,.teacher-card.selected{border-color:#667eea;box-shadow:0 4px 15px rgba(102,126,234,0.12)}
@@ -144,8 +117,6 @@
         .teacher-avatar{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:bold;font-size:1.1em;flex-shrink:0}
         .teacher-info h4{color:#333;font-size:0.95em}
         .teacher-info p{color:#888;font-size:0.82em}
-
-        /* STEPS */
         .step-indicator{display:flex;justify-content:center;gap:8px;margin-bottom:25px;flex-wrap:wrap}
         .step{display:flex;align-items:center;gap:6px}
         .step-number{width:30px;height:30px;border-radius:50%;background:#e0e0e0;color:#888;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85em}
@@ -154,55 +125,44 @@
         .step-text{font-weight:600;color:#888;font-size:0.85em}
         .step.active .step-text{color:#4a3f8a}
         .step-line{width:35px;height:2px;background:#e0e0e0;align-self:center}
-
         .summary-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f0f0f0}
         .summary-row:last-child{border-bottom:none}
         .summary-label{color:#888;font-weight:500;font-size:0.9em}
         .summary-value{color:#333;font-weight:600;font-size:0.9em}
-
-        /* TABS */
         .tabs{display:flex;gap:4px;margin-bottom:18px;flex-wrap:wrap}
         .tab-btn{padding:8px 16px;border:2px solid #e0e0e0;background:#fff;border-radius:10px;cursor:pointer;font-weight:600;color:#888;transition:all 0.3s;font-size:0.85em}
         .tab-btn.active{border-color:#667eea;color:#667eea;background:rgba(102,126,234,0.04)}
-
-        /* SEARCH */
         .search-box{position:relative;margin-bottom:18px}
         .search-box input{width:100%;padding:12px 18px 12px 42px;border:2px solid #e0e0e0;border-radius:12px;font-size:0.95em;outline:none;transition:border-color 0.3s}
         .search-box input:focus{border-color:#667eea}
         .search-box::before{content:'🔍';position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:1em}
-
         .filter-row{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
         .filter-row select,.filter-row input[type="date"]{padding:9px 14px;border:2px solid #e0e0e0;border-radius:10px;font-size:0.9em;outline:none;cursor:pointer}
-
-        /* SCHEDULE WEEKLY */
         .weekly-grid{display:grid;grid-template-columns:100px repeat(5,1fr);gap:2px;background:#e0e0e0;border-radius:12px;overflow:hidden;margin-top:15px}
         .weekly-header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:12px 8px;text-align:center;font-weight:700;font-size:0.85em}
         .weekly-time{background:#f8f9fa;padding:10px 8px;text-align:center;font-weight:600;color:#555;font-size:0.8em;display:flex;align-items:center;justify-content:center}
         .weekly-cell{background:#fff;padding:8px;text-align:center;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;min-height:42px}
         .weekly-cell:hover{background:rgba(102,126,234,0.08)}
-        .weekly-cell.blocked{background:#ffebee;color:#e74c3c}
-        .weekly-cell.available{background:#e8f5e9;color:#27ae60}
+        .weekly-cell.blocked{background:#ffebee}
+        .weekly-cell.available{background:#e8f5e9}
         .weekly-cell .cell-icon{font-size:1.1em}
-
-        /* NOTIFICATION */
         .notification{position:fixed;top:75px;right:20px;padding:14px 22px;border-radius:12px;color:#fff;font-weight:600;z-index:300;animation:slideRight 0.3s ease;box-shadow:0 5px 20px rgba(0,0,0,0.2);font-size:0.9em;max-width:350px}
         .notification.success{background:linear-gradient(135deg,#2ecc71,#27ae60)}
         .notification.error{background:linear-gradient(135deg,#e74c3c,#c0392b)}
         .notification.info{background:linear-gradient(135deg,#3498db,#2980b9)}
         @keyframes slideRight{from{transform:translateX(100px);opacity:0}to{transform:translateX(0);opacity:1}}
-
         .empty-state{text-align:center;padding:40px 20px;color:#888}
         .empty-state .empty-icon{font-size:3.5em;margin-bottom:12px}
         .empty-state p{font-size:1em}
-
         .hidden{display:none!important}
-
-        .password-toggle{position:relative}
-        .password-toggle button{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:1.1em;padding:5px}
-
         .info-box{background:linear-gradient(135deg,rgba(102,126,234,0.08),rgba(118,75,162,0.08));border:1px solid rgba(102,126,234,0.2);border-radius:10px;padding:14px 18px;margin-bottom:18px;font-size:0.88em;color:#555;line-height:1.5}
         .info-box strong{color:#4a3f8a}
-
+        .config-box{background:#fff;border-radius:14px;padding:25px;box-shadow:0 4px 15px rgba(0,0,0,0.06);margin-bottom:22px;max-width:500px;margin-left:auto;margin-right:auto}
+        .config-box h3{color:#e74c3c;margin-bottom:15px;text-align:center}
+        .config-box .form-group input{font-family:monospace;font-size:0.85em}
+        .config-status{padding:10px 15px;border-radius:8px;margin-top:10px;font-size:0.85em;font-weight:600}
+        .config-status.ok{background:#e8f5e9;color:#27ae60}
+        .config-status.fail{background:#ffebee;color:#e74c3c}
         @media(max-width:768px){
             .navbar{padding:10px 15px}
             .calendar-wrapper{grid-template-columns:1fr}
@@ -224,13 +184,57 @@
 
 <div class="loader-overlay" id="loader">
     <div class="spinner"></div>
-    <div class="loader-text">Yükleniyor...</div>
+    <div class="loader-text" id="loaderText">Yükleniyor...</div>
 </div>
 
-<!-- ===== AUTH PAGE ===== -->
+<!-- SETUP SAYFASI -->
+<div id="setupPage" class="hidden">
+    <nav class="navbar">
+        <div class="logo"><span>🏫</span> Veli Randevu Sistemi</div>
+    </nav>
+    <div class="auth-container">
+        <div class="config-box">
+            <h3>⚙️ GitHub Bağlantı Ayarları</h3>
+            <p style="text-align:center;color:#888;margin-bottom:20px;font-size:0.9em;">
+                Sistem GitHub'a bağlanamadı. Lütfen ayarlarınızı kontrol edin.
+            </p>
+            <div class="form-group">
+                <label>GitHub Kullanıcı Adı</label>
+                <input type="text" id="cfgOwner" placeholder="ornek-kullanici">
+            </div>
+            <div class="form-group">
+                <label>Repo Adı</label>
+                <input type="text" id="cfgRepo" placeholder="randevu-sistemi">
+            </div>
+            <div class="form-group">
+                <label>GitHub Token</label>
+                <input type="password" id="cfgToken" placeholder="ghp_xxxx veya github_pat_xxxx">
+            </div>
+            <div class="form-group">
+                <label>Branch</label>
+                <input type="text" id="cfgBranch" value="main">
+            </div>
+            <button class="btn-primary" onclick="testAndSaveConfig()">🔗 Bağlantıyı Test Et ve Kaydet</button>
+            <div id="configStatus"></div>
+
+            <div class="info-box" style="margin-top:20px;">
+                <strong>Token Nasıl Alınır:</strong><br>
+                1. GitHub → Settings → Developer settings<br>
+                2. Personal access tokens → Fine-grained tokens<br>
+                3. Generate new token<br>
+                4. Repository access: Repo'nuzu seçin<br>
+                5. Permissions → Contents: Read and write<br>
+                6. Generate token → Kopyalayın
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AUTH SAYFASI -->
 <div id="authPage" class="hidden">
     <nav class="navbar">
         <div class="logo"><span>🏫</span> Veli Randevu Sistemi</div>
+        <button class="btn-secondary" onclick="showSetup()" style="font-size:0.8em;">⚙️ Ayarlar</button>
     </nav>
     <div class="auth-container">
         <div class="auth-box">
@@ -242,20 +246,18 @@
                 <button class="auth-tab" onclick="switchAuthTab('register')">Üye Ol</button>
             </div>
 
-            <!-- LOGIN FORM -->
             <div id="loginForm">
                 <div class="form-group">
                     <label>Kullanıcı Adı</label>
-                    <input type="text" id="loginUsername" placeholder="Kullanıcı adınızı giriniz">
+                    <input type="text" id="loginUsername" placeholder="Kullanıcı adınız">
                 </div>
                 <div class="form-group">
                     <label>Şifre</label>
-                    <input type="password" id="loginPassword" placeholder="Şifrenizi giriniz">
+                    <input type="password" id="loginPassword" placeholder="Şifreniz" onkeypress="if(event.key==='Enter')doLogin()">
                 </div>
                 <button class="btn-primary" onclick="doLogin()" id="loginBtn">Giriş Yap</button>
             </div>
 
-            <!-- REGISTER FORM -->
             <div id="registerForm" class="hidden">
                 <div class="role-selector">
                     <div class="role-btn active" onclick="selectRegRole('veli')" id="regRoleVeli">
@@ -269,40 +271,38 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Ad Soyad</label>
+                        <label>Ad Soyad *</label>
                         <input type="text" id="regName" placeholder="Ad Soyad">
                     </div>
                     <div class="form-group">
-                        <label>Kullanıcı Adı</label>
-                        <input type="text" id="regUsername" placeholder="Kullanıcı adı">
+                        <label>Kullanıcı Adı *</label>
+                        <input type="text" id="regUsername" placeholder="kullanici.adi">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>E-posta</label>
-                    <input type="email" id="regEmail" placeholder="E-posta adresiniz">
+                    <label>E-posta *</label>
+                    <input type="email" id="regEmail" placeholder="ornek@email.com">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
-                        <label>Şifre</label>
-                        <input type="password" id="regPassword" placeholder="Şifre (min 6 karakter)">
+                        <label>Şifre * (min 6 karakter)</label>
+                        <input type="password" id="regPassword" placeholder="Şifre">
                     </div>
                     <div class="form-group">
-                        <label>Şifre Tekrar</label>
-                        <input type="password" id="regPassword2" placeholder="Şifreyi tekrar giriniz">
+                        <label>Şifre Tekrar *</label>
+                        <input type="password" id="regPassword2" placeholder="Şifre tekrar">
                     </div>
                 </div>
-
-                <!-- Veli alanları -->
                 <div id="veliFields">
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Öğrenci Adı Soyadı</label>
-                            <input type="text" id="regStudentName" placeholder="Çocuğunuzun adı soyadı">
+                            <label>Öğrenci Adı *</label>
+                            <input type="text" id="regStudentName" placeholder="Çocuğunuzun adı">
                         </div>
                         <div class="form-group">
-                            <label>Öğrenci Sınıfı</label>
+                            <label>Öğrenci Sınıfı *</label>
                             <select id="regStudentClass">
-                                <option value="">Sınıf Seçin</option>
+                                <option value="">Seçin</option>
                                 <option>5-A</option><option>5-B</option>
                                 <option>6-A</option><option>6-B</option>
                                 <option>7-A</option><option>7-B</option>
@@ -315,14 +315,12 @@
                         <input type="tel" id="regPhone" placeholder="05XX XXX XX XX">
                     </div>
                 </div>
-
-                <!-- Öğretmen alanları -->
                 <div id="ogretmenFields" class="hidden">
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Branş</label>
+                            <label>Branş *</label>
                             <select id="regBranch">
-                                <option value="">Branş Seçin</option>
+                                <option value="">Seçin</option>
                                 <option>Matematik</option><option>Türkçe</option>
                                 <option>Fen Bilimleri</option><option>Sosyal Bilgiler</option>
                                 <option>İngilizce</option><option>Beden Eğitimi</option>
@@ -333,25 +331,23 @@
                         </div>
                         <div class="form-group">
                             <label>Sınıflar</label>
-                            <input type="text" id="regClasses" placeholder="5-A, 6-B, 7-A">
+                            <input type="text" id="regClasses" placeholder="5-A, 6-B">
                         </div>
                     </div>
                 </div>
-
                 <button class="btn-primary" onclick="doRegister()" id="regBtn">Üye Ol</button>
             </div>
 
             <div class="info-box" style="margin-top:20px;">
-                <strong>Demo Giriş:</strong><br>
+                <strong>Demo Hesaplar:</strong><br>
                 Yönetici → admin / admin123<br>
-                Öğretmen → ayse.yilmaz / ogretmen123<br>
-                Veya yeni üye olun!
+                Öğretmen → ayse.yilmaz / ogretmen123
             </div>
         </div>
     </div>
 </div>
 
-<!-- ===== MAIN APP ===== -->
+<!-- ANA UYGULAMA -->
 <div id="mainApp" class="hidden">
     <nav class="navbar">
         <div class="logo"><span>🏫</span> Veli Randevu Sistemi</div>
@@ -369,12 +365,11 @@
 </div>
 
 <script>
-// ===================== CONFIG =====================
-const CONFIG = {
-    // ---- BURAYI KENDİ REPO BİLGİLERİNİZLE DEĞİŞTİRİN ----
-    GITHUB_OWNER: 'kadirsener1',
-    GITHUB_REPO: 'randevum',
-    GITHUB_TOKEN: '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', // GitHub Personal Access Token
+// ==================== CONFIG ====================
+let CONFIG = {
+    GITHUB_OWNER: '',
+    GITHUB_REPO: '',
+    GITHUB_TOKEN: '',
     BRANCH: 'main',
     PATHS: {
         users: 'db/users.json',
@@ -383,9 +378,94 @@ const CONFIG = {
     }
 };
 
-const API_BASE = `https://api.github.com/repos/${CONFIG.GITHUB_OWNER}/${CONFIG.GITHUB_REPO}/contents/`;
+function loadConfig() {
+    const saved = localStorage.getItem('github_config');
+    if (saved) {
+        const c = JSON.parse(saved);
+        CONFIG.GITHUB_OWNER = c.owner || '';
+        CONFIG.GITHUB_REPO = c.repo || '';
+        CONFIG.GITHUB_TOKEN = c.token || '';
+        CONFIG.BRANCH = c.branch || 'main';
+        return true;
+    }
+    return false;
+}
 
-// ===================== GITHUB DB KATMANI =====================
+function saveConfig(owner, repo, token, branch) {
+    localStorage.setItem('github_config', JSON.stringify({ owner, repo, token, branch }));
+    CONFIG.GITHUB_OWNER = owner;
+    CONFIG.GITHUB_REPO = repo;
+    CONFIG.GITHUB_TOKEN = token;
+    CONFIG.BRANCH = branch;
+}
+
+function getApiBase() {
+    return `https://api.github.com/repos/${CONFIG.GITHUB_OWNER}/${CONFIG.GITHUB_REPO}/contents/`;
+}
+
+// ==================== SETUP ====================
+function showSetup() {
+    document.getElementById('authPage').classList.add('hidden');
+    document.getElementById('mainApp').classList.add('hidden');
+    document.getElementById('setupPage').classList.remove('hidden');
+    document.getElementById('cfgOwner').value = CONFIG.GITHUB_OWNER;
+    document.getElementById('cfgRepo').value = CONFIG.GITHUB_REPO;
+    document.getElementById('cfgToken').value = CONFIG.GITHUB_TOKEN;
+    document.getElementById('cfgBranch').value = CONFIG.BRANCH;
+}
+
+async function testAndSaveConfig() {
+    const owner = document.getElementById('cfgOwner').value.trim();
+    const repo = document.getElementById('cfgRepo').value.trim();
+    const token = document.getElementById('cfgToken').value.trim();
+    const branch = document.getElementById('cfgBranch').value.trim() || 'main';
+
+    if (!owner || !repo || !token) {
+        document.getElementById('configStatus').innerHTML = '<div class="config-status fail">❌ Tüm alanları doldurun</div>';
+        return;
+    }
+
+    document.getElementById('configStatus').innerHTML = '<div class="config-status" style="background:#e3f2fd;color:#2196f3;">⏳ Test ediliyor...</div>';
+
+    try {
+        const testUrl = `https://api.github.com/repos/${owner}/${repo}/contents/${CONFIG.PATHS.users}?ref=${branch}`;
+        const resp = await fetch(testUrl, {
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Accept': 'application/vnd.github.v3+json',
+                'X-GitHub-Api-Version': '2022-11-28'
+            }
+        });
+
+        if (resp.status === 401) {
+            document.getElementById('configStatus').innerHTML = '<div class="config-status fail">❌ Token geçersiz! Token\'ı kontrol edin.</div>';
+            return;
+        }
+        if (resp.status === 404) {
+            document.getElementById('configStatus').innerHTML = '<div class="config-status fail">❌ Repo veya db/users.json bulunamadı! Repo adını ve dosyaların varlığını kontrol edin.</div>';
+            return;
+        }
+        if (!resp.ok) {
+            const err = await resp.json();
+            document.getElementById('configStatus').innerHTML = `<div class="config-status fail">❌ Hata: ${err.message}</div>`;
+            return;
+        }
+
+        // Başarılı
+        saveConfig(owner, repo, token, branch);
+        document.getElementById('configStatus').innerHTML = '<div class="config-status ok">✅ Bağlantı başarılı! Yönlendiriliyorsunuz...</div>';
+
+        setTimeout(() => {
+            document.getElementById('setupPage').classList.add('hidden');
+            init();
+        }, 1000);
+
+    } catch (e) {
+        document.getElementById('configStatus').innerHTML = `<div class="config-status fail">❌ Bağlantı hatası: ${e.message}</div>`;
+    }
+}
+
+// ==================== GITHUB DB ====================
 const GitDB = {
     cache: {},
     shas: {},
@@ -393,70 +473,79 @@ const GitDB = {
     async read(fileKey) {
         const path = CONFIG.PATHS[fileKey];
         try {
-            const resp = await fetch(API_BASE + path + '?ref=' + CONFIG.BRANCH, {
+            const resp = await fetch(getApiBase() + path + '?ref=' + CONFIG.BRANCH + '&t=' + Date.now(), {
                 headers: {
-                    'Authorization': 'token ' + CONFIG.GITHUB_TOKEN,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
+                    'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'X-GitHub-Api-Version': '2022-11-28'
+                },
+                cache: 'no-store'
             });
-            if (!resp.ok) throw new Error('Dosya okunamadı: ' + path);
+            if (!resp.ok) {
+                if (resp.status === 401) throw new Error('BAD_CREDENTIALS');
+                throw new Error(`Dosya okunamadı (${resp.status})`);
+            }
             const data = await resp.json();
             this.shas[fileKey] = data.sha;
-            const content = JSON.parse(atob(data.content));
+            const decoded = decodeURIComponent(escape(atob(data.content.replace(/\n/g, ''))));
+            const content = JSON.parse(decoded);
             this.cache[fileKey] = content;
             return content;
         } catch (e) {
-            console.error('GitDB read error:', e);
-            // Dosya yoksa varsayılan döndür
+            if (e.message === 'BAD_CREDENTIALS') throw e;
+            console.error('Read error:', fileKey, e);
             const defaults = {
                 users: { users: [], nextId: 1 },
                 appointments: { appointments: [], nextId: 1 },
                 schedules: { weeklyBlocks: [], specificBlocks: [] }
             };
-            return defaults[fileKey] || {};
+            this.cache[fileKey] = defaults[fileKey];
+            return defaults[fileKey];
         }
     },
 
     async write(fileKey, data) {
         const path = CONFIG.PATHS[fileKey];
-        const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+        const jsonStr = JSON.stringify(data, null, 2);
+        const content = btoa(unescape(encodeURIComponent(jsonStr)));
 
-        // SHA'yı al (güncel)
+        // Güncel SHA al
         try {
-            const getResp = await fetch(API_BASE + path + '?ref=' + CONFIG.BRANCH, {
+            const getResp = await fetch(getApiBase() + path + '?ref=' + CONFIG.BRANCH + '&t=' + Date.now(), {
                 headers: {
-                    'Authorization': 'token ' + CONFIG.GITHUB_TOKEN,
-                    'Accept': 'application/vnd.github.v3+json'
-                }
+                    'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
+                    'Accept': 'application/vnd.github.v3+json',
+                    'X-GitHub-Api-Version': '2022-11-28'
+                },
+                cache: 'no-store'
             });
             if (getResp.ok) {
-                const getData = await getResp.json();
-                this.shas[fileKey] = getData.sha;
+                const gd = await getResp.json();
+                this.shas[fileKey] = gd.sha;
             }
-        } catch (e) {}
+        } catch (e) { console.error('SHA fetch error:', e); }
 
         const body = {
-            message: `Update ${path} - ${new Date().toLocaleString('tr-TR')}`,
+            message: `${fileKey} güncellendi - ${new Date().toLocaleString('tr-TR')}`,
             content: content,
             branch: CONFIG.BRANCH
         };
+        if (this.shas[fileKey]) body.sha = this.shas[fileKey];
 
-        if (this.shas[fileKey]) {
-            body.sha = this.shas[fileKey];
-        }
-
-        const resp = await fetch(API_BASE + path, {
+        const resp = await fetch(getApiBase() + path, {
             method: 'PUT',
             headers: {
-                'Authorization': 'token ' + CONFIG.GITHUB_TOKEN,
+                'Authorization': `Bearer ${CONFIG.GITHUB_TOKEN}`,
                 'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'X-GitHub-Api-Version': '2022-11-28'
             },
             body: JSON.stringify(body)
         });
 
         if (!resp.ok) {
             const errData = await resp.json();
+            console.error('Write error detail:', errData);
             throw new Error(errData.message || 'Yazma hatası');
         }
 
@@ -471,7 +560,7 @@ const GitDB = {
     }
 };
 
-// ===================== UYGULAMA STATE =====================
+// ==================== STATE ====================
 let currentUser = null;
 let currentPage = 'dashboard';
 let selectedDate = null;
@@ -481,39 +570,38 @@ let calMonth = new Date().getMonth();
 let calYear = new Date().getFullYear();
 let regRole = 'veli';
 
-// ===================== YARDIMCI FONKSİYONLAR =====================
+// ==================== HELPERS ====================
 function getToday() {
     const d = new Date();
     return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-const MONTHS = ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
-const MONTHS_S = ['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
-const DAYS = ['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
-const DAYS_FULL = ['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
-const TIME_SLOTS = ['08:30','09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
-const STATUS_TEXT = {pending:'Beklemede',approved:'Onaylandı',rejected:'Reddedildi',completed:'Tamamlandı'};
+const MONTHS=['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'];
+const MONTHS_S=['Oca','Şub','Mar','Nis','May','Haz','Tem','Ağu','Eyl','Eki','Kas','Ara'];
+const DAYS=['Pzt','Sal','Çar','Per','Cum','Cmt','Paz'];
+const DAYS_FULL=['Pazar','Pazartesi','Salı','Çarşamba','Perşembe','Cuma','Cumartesi'];
+const TIME_SLOTS=['08:30','09:00','09:30','10:00','10:30','11:00','11:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30'];
+const STATUS_TEXT={pending:'Beklemede',approved:'Onaylandı',rejected:'Reddedildi',completed:'Tamamlandı'};
 
-function showLoader(show=true) {
-    document.getElementById('loader').classList.toggle('hidden', !show);
+function showLoader(show=true, text='Yükleniyor...') {
+    document.getElementById('loader').classList.toggle('hidden',!show);
+    document.getElementById('loaderText').textContent = text;
 }
 
 function notify(msg, type='info') {
     document.querySelectorAll('.notification').forEach(n=>n.remove());
-    const el = document.createElement('div');
-    el.className = 'notification ' + type;
-    el.textContent = msg;
+    const el=document.createElement('div');
+    el.className='notification '+type;
+    el.textContent=msg;
     document.body.appendChild(el);
-    setTimeout(()=>el.remove(), 3500);
+    setTimeout(()=>el.remove(),4000);
 }
 
-function getDayOfWeek(dateStr) {
-    return new Date(dateStr).getDay(); // 0=pazar ... 6=cumartesi
-}
+function getDayOfWeek(dateStr) { return new Date(dateStr).getDay(); }
 
-// ===================== AUTH =====================
+// ==================== AUTH ====================
 function switchAuthTab(tab) {
     document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
-    if(tab==='login') {
+    if(tab==='login'){
         document.querySelectorAll('.auth-tab')[0].classList.add('active');
         document.getElementById('loginForm').classList.remove('hidden');
         document.getElementById('registerForm').classList.add('hidden');
@@ -525,95 +613,90 @@ function switchAuthTab(tab) {
 }
 
 function selectRegRole(role) {
-    regRole = role;
-    document.querySelectorAll('.role-btn').forEach(b=>b.classList.remove('active'));
+    regRole=role;
+    document.querySelectorAll('#registerForm .role-btn').forEach(b=>b.classList.remove('active'));
     document.getElementById('regRole'+role.charAt(0).toUpperCase()+role.slice(1)).classList.add('active');
-    document.getElementById('veliFields').classList.toggle('hidden', role!=='veli');
-    document.getElementById('ogretmenFields').classList.toggle('hidden', role!=='ogretmen');
+    document.getElementById('veliFields').classList.toggle('hidden',role!=='veli');
+    document.getElementById('ogretmenFields').classList.toggle('hidden',role!=='ogretmen');
 }
 
 async function doLogin() {
-    const username = document.getElementById('loginUsername').value.trim();
-    const password = document.getElementById('loginPassword').value.trim();
-    if(!username || !password) { notify('Kullanıcı adı ve şifre giriniz','error'); return; }
+    const username=document.getElementById('loginUsername').value.trim();
+    const password=document.getElementById('loginPassword').value.trim();
+    if(!username||!password){notify('Kullanıcı adı ve şifre giriniz','error');return;}
 
-    const btn = document.getElementById('loginBtn');
-    btn.disabled = true; btn.textContent = 'Giriş yapılıyor...';
+    const btn=document.getElementById('loginBtn');
+    btn.disabled=true;btn.textContent='Giriş yapılıyor...';
 
     try {
-        const data = await GitDB.read('users');
-        const user = data.users.find(u => u.username === username && u.password === password);
-        if(!user) { notify('Kullanıcı adı veya şifre hatalı!','error'); btn.disabled=false; btn.textContent='Giriş Yap'; return; }
-
-        currentUser = user;
-        localStorage.setItem('currentUser', JSON.stringify(user));
+        const data=await GitDB.read('users');
+        const user=data.users.find(u=>u.username===username&&u.password===password);
+        if(!user){notify('Kullanıcı adı veya şifre hatalı!','error');btn.disabled=false;btn.textContent='Giriş Yap';return;}
+        currentUser=user;
+        localStorage.setItem('currentUser',JSON.stringify(user));
         enterApp();
-        notify('Hoş geldiniz, ' + user.name + '!', 'success');
+        notify('Hoş geldiniz, '+user.name+'!','success');
     } catch(e) {
-        notify('Bağlantı hatası: ' + e.message, 'error');
+        if(e.message==='BAD_CREDENTIALS'){
+            notify('GitHub bağlantı hatası! Ayarları kontrol edin.','error');
+            showSetup();
+        } else {
+            notify('Bağlantı hatası: '+e.message,'error');
+        }
     }
-    btn.disabled = false; btn.textContent = 'Giriş Yap';
+    btn.disabled=false;btn.textContent='Giriş Yap';
 }
 
 async function doRegister() {
-    const name = document.getElementById('regName').value.trim();
-    const username = document.getElementById('regUsername').value.trim();
-    const email = document.getElementById('regEmail').value.trim();
-    const pass = document.getElementById('regPassword').value;
-    const pass2 = document.getElementById('regPassword2').value;
+    const name=document.getElementById('regName').value.trim();
+    const username=document.getElementById('regUsername').value.trim();
+    const email=document.getElementById('regEmail').value.trim();
+    const pass=document.getElementById('regPassword').value;
+    const pass2=document.getElementById('regPassword2').value;
+    if(!name||!username||!email||!pass){notify('Tüm zorunlu alanları doldurun','error');return;}
+    if(pass.length<6){notify('Şifre en az 6 karakter','error');return;}
+    if(pass!==pass2){notify('Şifreler eşleşmiyor','error');return;}
 
-    if(!name || !username || !email || !pass) { notify('Tüm alanları doldurunuz','error'); return; }
-    if(pass.length < 6) { notify('Şifre en az 6 karakter olmalı','error'); return; }
-    if(pass !== pass2) { notify('Şifreler eşleşmiyor','error'); return; }
-
-    const btn = document.getElementById('regBtn');
-    btn.disabled = true; btn.textContent = 'Kayıt yapılıyor...';
+    const btn=document.getElementById('regBtn');
+    btn.disabled=true;btn.textContent='Kayıt yapılıyor...';
 
     try {
-        const data = await GitDB.read('users');
-
-        if(data.users.find(u => u.username === username)) {
+        const data=await GitDB.read('users');
+        if(data.users.find(u=>u.username===username)){
             notify('Bu kullanıcı adı zaten alınmış','error');
-            btn.disabled=false; btn.textContent='Üye Ol'; return;
+            btn.disabled=false;btn.textContent='Üye Ol';return;
         }
 
-        const newUser = {
-            id: data.nextId,
-            username, password: pass, role: regRole,
-            name, email
-        };
+        const newUser={id:data.nextId,username,password:pass,role:regRole,name,email};
 
-        if(regRole === 'veli') {
-            const sName = document.getElementById('regStudentName').value.trim();
-            const sClass = document.getElementById('regStudentClass').value;
-            const phone = document.getElementById('regPhone').value.trim();
-            if(!sName || !sClass) { notify('Öğrenci bilgilerini doldurunuz','error'); btn.disabled=false; btn.textContent='Üye Ol'; return; }
-            newUser.studentName = sName;
-            newUser.studentClass = sClass;
-            newUser.phone = phone;
+        if(regRole==='veli'){
+            const sn=document.getElementById('regStudentName').value.trim();
+            const sc=document.getElementById('regStudentClass').value;
+            const ph=document.getElementById('regPhone').value.trim();
+            if(!sn||!sc){notify('Öğrenci bilgilerini doldurun','error');btn.disabled=false;btn.textContent='Üye Ol';return;}
+            newUser.studentName=sn;newUser.studentClass=sc;newUser.phone=ph;
         } else {
-            const branch = document.getElementById('regBranch').value;
-            const classes = document.getElementById('regClasses').value.trim();
-            if(!branch) { notify('Branş seçiniz','error'); btn.disabled=false; btn.textContent='Üye Ol'; return; }
-            newUser.branch = branch;
-            newUser.classes = classes;
+            const br=document.getElementById('regBranch').value;
+            const cl=document.getElementById('regClasses').value.trim();
+            if(!br){notify('Branş seçin','error');btn.disabled=false;btn.textContent='Üye Ol';return;}
+            newUser.branch=br;newUser.classes=cl;
         }
 
         data.users.push(newUser);
         data.nextId++;
-        await GitDB.write('users', data);
-
-        notify('Kayıt başarılı! Giriş yapabilirsiniz.', 'success');
+        await GitDB.write('users',data);
+        notify('Kayıt başarılı! Giriş yapabilirsiniz.','success');
         switchAuthTab('login');
-        document.getElementById('loginUsername').value = username;
+        document.getElementById('loginUsername').value=username;
+        document.getElementById('loginPassword').value='';
     } catch(e) {
-        notify('Kayıt hatası: ' + e.message, 'error');
+        notify('Kayıt hatası: '+e.message,'error');
     }
-    btn.disabled=false; btn.textContent='Üye Ol';
+    btn.disabled=false;btn.textContent='Üye Ol';
 }
 
 function doLogout() {
-    currentUser = null;
+    currentUser=null;
     localStorage.removeItem('currentUser');
     document.getElementById('mainApp').classList.add('hidden');
     document.getElementById('authPage').classList.remove('hidden');
@@ -621,85 +704,82 @@ function doLogout() {
 
 function enterApp() {
     document.getElementById('authPage').classList.add('hidden');
+    document.getElementById('setupPage').classList.add('hidden');
     document.getElementById('mainApp').classList.remove('hidden');
-    document.getElementById('dispUserName').textContent = currentUser.name;
-    const roleNames = {veli:'Veli',ogretmen:'Öğretmen',yonetici:'Yönetici'};
-    document.getElementById('dispUserRole').textContent = roleNames[currentUser.role] || currentUser.role;
-    document.getElementById('userAvatar').textContent = currentUser.name.charAt(0);
+    document.getElementById('dispUserName').textContent=currentUser.name;
+    const rn={veli:'Veli',ogretmen:'Öğretmen',yonetici:'Yönetici'};
+    document.getElementById('dispUserRole').textContent=rn[currentUser.role]||currentUser.role;
+    document.getElementById('userAvatar').textContent=currentUser.name.charAt(0);
     buildNav();
     navigateTo('dashboard');
 }
 
-// ===================== NAVİGASYON =====================
-function buildNav() {
-    const nav = document.getElementById('navLinks');
-    let html = '';
-    if(currentUser.role==='veli') {
-        html = `<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
-                <button onclick="navigateTo('newAppointment')" id="nav-newAppointment">➕ Yeni Randevu</button>
-                <button onclick="navigateTo('myAppointments')" id="nav-myAppointments">📋 Randevularım</button>`;
-    } else if(currentUser.role==='ogretmen') {
-        html = `<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
-                <button onclick="navigateTo('incomingApts')" id="nav-incomingApts">📥 Gelen Talepler</button>
-                <button onclick="navigateTo('schedule')" id="nav-schedule">📅 Müsaitlik</button>`;
-    } else {
-        html = `<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
-                <button onclick="navigateTo('allApts')" id="nav-allApts">📋 Tüm Randevular</button>
-                <button onclick="navigateTo('teachers')" id="nav-teachers">👩‍🏫 Öğretmenler</button>
-                <button onclick="navigateTo('reports')" id="nav-reports">📈 Raporlar</button>`;
+// ==================== NAV ====================
+function buildNav(){
+    const nav=document.getElementById('navLinks');
+    let h='';
+    if(currentUser.role==='veli'){
+        h=`<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+           <button onclick="navigateTo('newAppointment')" id="nav-newAppointment">➕ Yeni Randevu</button>
+           <button onclick="navigateTo('myAppointments')" id="nav-myAppointments">📋 Randevularım</button>`;
+    }else if(currentUser.role==='ogretmen'){
+        h=`<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+           <button onclick="navigateTo('incomingApts')" id="nav-incomingApts">📥 Gelen Talepler</button>
+           <button onclick="navigateTo('schedule')" id="nav-schedule">📅 Müsaitlik</button>`;
+    }else{
+        h=`<button onclick="navigateTo('dashboard')" id="nav-dashboard">📊 Panel</button>
+           <button onclick="navigateTo('allApts')" id="nav-allApts">📋 Tüm Randevular</button>
+           <button onclick="navigateTo('teachers')" id="nav-teachers">👩‍🏫 Öğretmenler</button>
+           <button onclick="navigateTo('reports')" id="nav-reports">📈 Raporlar</button>`;
     }
-    nav.innerHTML = html;
+    nav.innerHTML=h;
 }
 
-async function navigateTo(page) {
-    currentPage = page;
+async function navigateTo(page){
+    currentPage=page;
     document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
-    const ab = document.getElementById('nav-'+page);
-    if(ab) ab.classList.add('active');
+    const ab=document.getElementById('nav-'+page);
+    if(ab)ab.classList.add('active');
 
-    showLoader();
-    try {
-        // Verileri yenile
+    showLoader(true,'Veriler yükleniyor...');
+    try{
         await GitDB.read('appointments');
         await GitDB.read('schedules');
-        if(page==='allApts'||page==='teachers'||page==='reports') await GitDB.read('users');
+        if(['allApts','teachers','reports','newAppointment','dashboard'].includes(page)) await GitDB.read('users');
 
-        const mc = document.getElementById('mainContent');
-        switch(page) {
-            case 'dashboard': renderDashboard(mc); break;
-            case 'newAppointment': renderNewAppointment(mc); break;
-            case 'myAppointments': renderMyAppointments(mc); break;
-            case 'incomingApts': renderIncomingApts(mc); break;
-            case 'schedule': renderSchedule(mc); break;
-            case 'allApts': renderAllApts(mc); break;
-            case 'teachers': renderTeachers(mc); break;
-            case 'reports': renderReports(mc); break;
+        const mc=document.getElementById('mainContent');
+        switch(page){
+            case 'dashboard':renderDashboard(mc);break;
+            case 'newAppointment':renderNewAppointment(mc);break;
+            case 'myAppointments':renderMyAppointments(mc);break;
+            case 'incomingApts':renderIncomingApts(mc);break;
+            case 'schedule':renderSchedule(mc);break;
+            case 'allApts':renderAllApts(mc);break;
+            case 'teachers':renderTeachersPage(mc);break;
+            case 'reports':renderReports(mc);break;
         }
-    } catch(e) {
+    }catch(e){
         notify('Veri yükleme hatası: '+e.message,'error');
     }
     showLoader(false);
 }
 
-// ===================== DASHBOARD =====================
-function renderDashboard(c) {
-    const apts = GitDB.getCached('appointments')?.appointments || [];
-    let my, s;
-    if(currentUser.role==='veli') {
-        my = apts.filter(a=>a.parentId===currentUser.id);
-        s = {total:my.length, pending:my.filter(a=>a.status==='pending').length, approved:my.filter(a=>a.status==='approved').length, upcoming:my.filter(a=>a.status==='approved'&&a.date>=getToday()).length};
-    } else if(currentUser.role==='ogretmen') {
-        my = apts.filter(a=>a.teacherId===currentUser.id);
-        s = {total:my.length, pending:my.filter(a=>a.status==='pending').length, approved:my.filter(a=>a.status==='approved').length, today:my.filter(a=>a.date===getToday()&&a.status==='approved').length};
-    } else {
-        my = apts;
-        const users = GitDB.getCached('users')?.users || [];
-        s = {total:apts.length, pending:apts.filter(a=>a.status==='pending').length, approved:apts.filter(a=>a.status==='approved').length, teachers:users.filter(u=>u.role==='ogretmen').length};
+// ==================== DASHBOARD ====================
+function renderDashboard(c){
+    const apts=GitDB.getCached('appointments')?.appointments||[];
+    let my,s;
+    if(currentUser.role==='veli'){
+        my=apts.filter(a=>a.parentId===currentUser.id);
+        s={total:my.length,pending:my.filter(a=>a.status==='pending').length,approved:my.filter(a=>a.status==='approved').length,upcoming:my.filter(a=>a.status==='approved'&&a.date>=getToday()).length};
+    }else if(currentUser.role==='ogretmen'){
+        my=apts.filter(a=>a.teacherId===currentUser.id);
+        s={total:my.length,pending:my.filter(a=>a.status==='pending').length,approved:my.filter(a=>a.status==='approved').length,today:my.filter(a=>a.date===getToday()&&a.status==='approved').length};
+    }else{
+        my=apts;const users=GitDB.getCached('users')?.users||[];
+        s={total:apts.length,pending:apts.filter(a=>a.status==='pending').length,approved:apts.filter(a=>a.status==='approved').length,teachers:users.filter(u=>u.role==='ogretmen').length};
     }
-
-    const todayApts = (currentUser.role==='veli' ? my : currentUser.role==='ogretmen' ? my : apts).filter(a=>a.date===getToday());
-
-    c.innerHTML = `
+    const todayA=(currentUser.role==='yonetici'?apts:my).filter(a=>a.date===getToday()&&a.status==='approved');
+    c.innerHTML=`
         <div class="section-header"><h2>📊 Kontrol Paneli</h2></div>
         <div class="stats-grid">
             <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-info"><h3>${s.total}</h3><p>Toplam Randevu</p></div></div>
@@ -707,18 +787,16 @@ function renderDashboard(c) {
             <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><h3>${s.approved}</h3><p>Onaylanan</p></div></div>
             <div class="stat-card"><div class="stat-icon red">${currentUser.role==='yonetici'?'👩‍🏫':'📅'}</div><div class="stat-info"><h3>${currentUser.role==='yonetici'?s.teachers:(currentUser.role==='ogretmen'?s.today:s.upcoming)}</h3><p>${currentUser.role==='yonetici'?'Öğretmen':(currentUser.role==='ogretmen'?'Bugünkü':'Yaklaşan')}</p></div></div>
         </div>
-        <div class="card">
-            <h3>📅 Bugünkü Randevular</h3>
-            ${todayApts.length ? '<ul class="appointment-list">'+todayApts.map(a=>renderAptItem(a)).join('')+'</ul>' : '<div class="empty-state"><div class="empty-icon">📭</div><p>Bugün randevu yok</p></div>'}
+        <div class="card"><h3>📅 Bugünkü Randevular</h3>
+            ${todayA.length?'<ul class="appointment-list">'+todayA.map(a=>renderAptItem(a)).join('')+'</ul>':'<div class="empty-state"><div class="empty-icon">📭</div><p>Bugün için randevu yok</p></div>'}
         </div>
-        ${currentUser.role==='veli'?'<div style="text-align:center;margin-top:18px;"><button class="btn-primary" style="width:auto;padding:13px 35px;" onclick="navigateTo(\'newAppointment\')">➕ Yeni Randevu Oluştur</button></div>':''}
-    `;
+        ${currentUser.role==='veli'?'<div style="text-align:center;margin-top:18px;"><button class="btn-primary" style="width:auto;padding:13px 35px;" onclick="navigateTo(\'newAppointment\')">➕ Yeni Randevu Oluştur</button></div>':''}`;
 }
 
-// ===================== YENİ RANDEVU (VELİ) =====================
-function renderNewAppointment(c) {
-    selectedTeacher=null; selectedDate=null; selectedTime=null;
-    c.innerHTML = `
+// ==================== YENİ RANDEVU ====================
+function renderNewAppointment(c){
+    selectedTeacher=null;selectedDate=null;selectedTime=null;
+    c.innerHTML=`
         <div class="section-header"><h2>➕ Yeni Randevu Oluştur</h2></div>
         <div class="card">
             <div class="step-indicator">
@@ -729,61 +807,46 @@ function renderNewAppointment(c) {
                 <div class="step" id="s3"><div class="step-number">3</div><div class="step-text">Onayla</div></div>
             </div>
             <div id="stepContent"></div>
-        </div>
-    `;
+        </div>`;
     showStep1();
 }
 
-function updateSteps(active) {
-    [1,2,3].forEach(i=>{
-        const el=document.getElementById('s'+i);
-        if(!el)return;
-        el.className='step';
-        if(i<active) el.classList.add('done');
-        if(i===active) el.classList.add('active');
-    });
-}
+function updateSteps(n){[1,2,3].forEach(i=>{const el=document.getElementById('s'+i);if(!el)return;el.className='step';if(i<n)el.classList.add('done');if(i===n)el.classList.add('active');});}
 
-function showStep1() {
+function showStep1(){
     updateSteps(1);
-    const users = GitDB.getCached('users')?.users || [];
-    const teachers = users.filter(u=>u.role==='ogretmen');
-    document.getElementById('stepContent').innerHTML = `
+    const users=GitDB.getCached('users')?.users||[];
+    const ts=users.filter(u=>u.role==='ogretmen');
+    document.getElementById('stepContent').innerHTML=`
         <h3>👩‍🏫 Öğretmen Seçiniz</h3>
         <div class="search-box"><input type="text" placeholder="Öğretmen veya branş ara..." oninput="filterT(this.value)"></div>
-        <div class="teacher-grid" id="tGrid">
-            ${teachers.map(t=>`
-                <div class="teacher-card" onclick="pickTeacher(${t.id})">
-                    <div class="teacher-avatar">${t.name.charAt(0)}</div>
-                    <div class="teacher-info"><h4>${t.name}</h4><p>${t.branch||''}</p><p style="font-size:0.78em;color:#999;">Sınıflar: ${t.classes||'-'}</p></div>
-                </div>
-            `).join('')}
-        </div>
-    `;
+        <div class="teacher-grid" id="tGrid">${ts.map(t=>`
+            <div class="teacher-card" onclick="pickTeacher(${t.id})">
+                <div class="teacher-avatar">${t.name.charAt(0)}</div>
+                <div class="teacher-info"><h4>${t.name}</h4><p>${t.branch||''}</p><p style="font-size:0.78em;color:#999;">Sınıflar: ${t.classes||'-'}</p></div>
+            </div>`).join('')}</div>`;
 }
 
-function filterT(q) {
-    const users = GitDB.getCached('users')?.users||[];
-    const ts = users.filter(u=>u.role==='ogretmen'&&(u.name.toLowerCase().includes(q.toLowerCase())||((u.branch||'').toLowerCase().includes(q.toLowerCase()))));
-    document.getElementById('tGrid').innerHTML = ts.map(t=>`
+function filterT(q){
+    const users=GitDB.getCached('users')?.users||[];
+    const ts=users.filter(u=>u.role==='ogretmen'&&(u.name.toLowerCase().includes(q.toLowerCase())||(u.branch||'').toLowerCase().includes(q.toLowerCase())));
+    document.getElementById('tGrid').innerHTML=ts.map(t=>`
         <div class="teacher-card" onclick="pickTeacher(${t.id})">
             <div class="teacher-avatar">${t.name.charAt(0)}</div>
             <div class="teacher-info"><h4>${t.name}</h4><p>${t.branch||''}</p></div>
-        </div>
-    `).join('') || '<div class="empty-state"><p>Sonuç bulunamadı</p></div>';
+        </div>`).join('')||'<div class="empty-state"><p>Sonuç bulunamadı</p></div>';
 }
 
-function pickTeacher(id) {
-    const users = GitDB.getCached('users')?.users||[];
-    selectedTeacher = users.find(u=>u.id===id);
-    selectedDate=null; selectedTime=null;
+function pickTeacher(id){
+    const users=GitDB.getCached('users')?.users||[];
+    selectedTeacher=users.find(u=>u.id===id);
+    selectedDate=null;selectedTime=null;
     showStep2();
 }
 
-function showStep2() {
-    updateSteps(2);
-    calMonth=new Date().getMonth(); calYear=new Date().getFullYear();
-    document.getElementById('stepContent').innerHTML = `
+function showStep2(){
+    updateSteps(2);calMonth=new Date().getMonth();calYear=new Date().getFullYear();
+    document.getElementById('stepContent').innerHTML=`
         <div style="margin-bottom:12px;">
             <button class="btn-secondary" onclick="showStep1()" style="width:auto;">← Geri</button>
             <span style="margin-left:12px;color:#555;font-weight:600;">${selectedTeacher.name} (${selectedTeacher.branch||''})</span>
@@ -791,409 +854,263 @@ function showStep2() {
         <div class="calendar-wrapper">
             <div class="calendar" id="calBox"></div>
             <div class="time-slots" id="slotsBox"><h3>🕐 Saat Seçiniz</h3><p style="color:#888;">Önce tarih seçiniz</p></div>
-        </div>
-    `;
+        </div>`;
     drawCalendar();
 }
 
-function drawCalendar() {
-    const box = document.getElementById('calBox');
-    const first = new Date(calYear, calMonth, 1);
-    const last = new Date(calYear, calMonth+1, 0);
-    let startDay = first.getDay()-1; if(startDay<0) startDay=6;
-    const today = new Date(); today.setHours(0,0,0,0);
-
-    const apts = GitDB.getCached('appointments')?.appointments||[];
-    const aptDates = apts.filter(a=>a.teacherId===selectedTeacher.id&&a.status!=='rejected').map(a=>a.date);
-
-    let html = DAYS.map(d=>`<div class="calendar-day-name">${d}</div>`).join('');
-    for(let i=0;i<startDay;i++) html+=`<div class="calendar-day empty"></div>`;
-    for(let d=1;d<=last.getDate();d++) {
-        const ds = `${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-        const dt = new Date(calYear,calMonth,d);
-        const isToday = dt.getTime()===today.getTime();
-        const isPast = dt<today;
-        const isWE = dt.getDay()===0||dt.getDay()===6;
-        const isSel = selectedDate===ds;
-        const hasA = aptDates.includes(ds);
-
-        let cls='calendar-day';
-        if(isToday) cls+=' today';
-        if(isSel) cls+=' selected';
-        if(isPast) cls+=' past';
-        if(isWE) cls+=' weekend';
-        if(hasA) cls+=' has-apt';
-
-        if(isPast||isWE) html+=`<div class="${cls}">${d}</div>`;
-        else html+=`<div class="${cls}" onclick="pickDate('${ds}')">${d}</div>`;
+function drawCalendar(){
+    const box=document.getElementById('calBox');
+    const first=new Date(calYear,calMonth,1);
+    const last=new Date(calYear,calMonth+1,0);
+    let sd=first.getDay()-1;if(sd<0)sd=6;
+    const today=new Date();today.setHours(0,0,0,0);
+    const apts=GitDB.getCached('appointments')?.appointments||[];
+    const aptDates=apts.filter(a=>a.teacherId===selectedTeacher.id&&a.status!=='rejected').map(a=>a.date);
+    let h=DAYS.map(d=>`<div class="calendar-day-name">${d}</div>`).join('');
+    for(let i=0;i<sd;i++)h+=`<div class="calendar-day empty"></div>`;
+    for(let d=1;d<=last.getDate();d++){
+        const ds=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+        const dt=new Date(calYear,calMonth,d);
+        const isT=dt.getTime()===today.getTime(),isP=dt<today,isWE=dt.getDay()===0||dt.getDay()===6,isS=selectedDate===ds,hasA=aptDates.includes(ds);
+        let cls='calendar-day';if(isT)cls+=' today';if(isS)cls+=' selected';if(isP)cls+=' past';if(isWE)cls+=' weekend';if(hasA)cls+=' has-apt';
+        if(isP||isWE)h+=`<div class="${cls}">${d}</div>`;
+        else h+=`<div class="${cls}" onclick="pickDate('${ds}')">${d}</div>`;
     }
-
-    box.innerHTML = `
-        <div class="calendar-header">
-            <h3>${MONTHS[calMonth]} ${calYear}</h3>
-            <div class="calendar-nav">
-                <button onclick="calMonth--;if(calMonth<0){calMonth=11;calYear--;}drawCalendar()">◀</button>
-                <button onclick="calMonth++;if(calMonth>11){calMonth=0;calYear++;}drawCalendar()">▶</button>
-            </div>
-        </div>
-        <div class="calendar-grid">${html}</div>
-    `;
+    box.innerHTML=`<div class="calendar-header"><h3>${MONTHS[calMonth]} ${calYear}</h3><div class="calendar-nav"><button onclick="calMonth--;if(calMonth<0){calMonth=11;calYear--;}drawCalendar()">◀</button><button onclick="calMonth++;if(calMonth>11){calMonth=0;calYear++;}drawCalendar()">▶</button></div></div><div class="calendar-grid">${h}</div>`;
 }
 
-function pickDate(ds) {
-    selectedDate=ds; selectedTime=null;
-    drawCalendar();
-    drawSlots();
-}
+function pickDate(ds){selectedDate=ds;selectedTime=null;drawCalendar();drawSlots();}
 
-function drawSlots() {
-    const box = document.getElementById('slotsBox');
-    const apts = GitDB.getCached('appointments')?.appointments||[];
-    const schData = GitDB.getCached('schedules')||{weeklyBlocks:[],specificBlocks:[]};
-
-    const takenTimes = apts.filter(a=>a.teacherId===selectedTeacher.id&&a.date===selectedDate&&a.status!=='rejected').map(a=>a.time);
-
-    // Haftalık blokları kontrol et
-    const dayOfWeek = getDayOfWeek(selectedDate); // 0=pazar
-    const weeklyBlocked = schData.weeklyBlocks
-        .filter(b=>b.teacherId===selectedTeacher.id&&b.dayOfWeek===dayOfWeek)
-        .map(b=>b.time);
-
-    // Özel tarih blokları
-    const specificBlocked = schData.specificBlocks
-        .filter(b=>b.teacherId===selectedTeacher.id&&b.date===selectedDate)
-        .map(b=>b.time);
-
-    const allBlocked = [...new Set([...weeklyBlocked, ...specificBlocked])];
-
-    const dt = new Date(selectedDate);
-
-    box.innerHTML = `
-        <h3>🕐 ${dt.getDate()} ${MONTHS[dt.getMonth()]} ${DAYS_FULL[dt.getDay()]}</h3>
-        <p style="color:#888;margin-bottom:12px;font-size:0.85em;">
-            <span style="display:inline-block;width:10px;height:10px;background:#e8f5e9;border:1px solid #27ae60;border-radius:3px;margin-right:3px;"></span> Müsait
-            <span style="display:inline-block;width:10px;height:10px;background:#fff0f0;border:1px solid #e74c3c;border-radius:3px;margin:0 3px 0 10px;"></span> Dolu
-            <span style="display:inline-block;width:10px;height:10px;background:#f5f5f5;border:1px solid #ccc;border-radius:3px;margin:0 3px 0 10px;"></span> Kapalı
-        </p>
-        <div class="slots-grid">
-            ${TIME_SLOTS.map(slot=>{
-                const isTaken = takenTimes.includes(slot);
-                const isBlocked = allBlocked.includes(slot);
-                const isSel = selectedTime===slot;
-                let cls='time-slot';
-                if(isTaken) cls+=' taken';
-                else if(isBlocked) cls+=' blocked';
-                else if(isSel) cls+=' selected';
-                const clickable = !isTaken&&!isBlocked;
-                return `<div class="${cls}" ${clickable?`onclick="pickTime('${slot}')"`:''}>${slot}${isTaken?' (Dolu)':''}${isBlocked?' (Kapalı)':''}</div>`;
-            }).join('')}
-        </div>
-    `;
-}
-
-function pickTime(t) {
-    selectedTime=t;
-    drawSlots();
-    setTimeout(()=>showStep3(), 200);
-}
-
-function showStep3() {
-    updateSteps(3);
+function drawSlots(){
+    const box=document.getElementById('slotsBox');
+    const apts=GitDB.getCached('appointments')?.appointments||[];
+    const sch=GitDB.getCached('schedules')||{weeklyBlocks:[],specificBlocks:[]};
+    const taken=apts.filter(a=>a.teacherId===selectedTeacher.id&&a.date===selectedDate&&a.status!=='rejected').map(a=>a.time);
+    const dow=getDayOfWeek(selectedDate);
+    const wb=sch.weeklyBlocks.filter(b=>b.teacherId===selectedTeacher.id&&b.dayOfWeek===dow).map(b=>b.time);
+    const sb=(sch.specificBlocks||[]).filter(b=>b.teacherId===selectedTeacher.id&&b.date===selectedDate).map(b=>b.time);
+    const blocked=[...new Set([...wb,...sb])];
     const dt=new Date(selectedDate);
-    document.getElementById('stepContent').innerHTML = `
+
+    box.innerHTML=`
+        <h3>🕐 ${dt.getDate()} ${MONTHS[dt.getMonth()]} ${DAYS_FULL[dt.getDay()]}</h3>
+        <p style="color:#888;margin-bottom:12px;font-size:0.82em;">🟢 Müsait &nbsp; 🔴 Dolu &nbsp; ⚫ Kapalı</p>
+        <div class="slots-grid">${TIME_SLOTS.map(slot=>{
+            const isT=taken.includes(slot),isB=blocked.includes(slot),isS=selectedTime===slot;
+            let cls='time-slot';
+            if(isT)cls+=' taken';else if(isB)cls+=' blocked';else if(isS)cls+=' selected';
+            const click=!isT&&!isB;
+            return `<div class="${cls}" ${click?`onclick="pickTime('${slot}')"`:''}>${slot}${isT?' ●':isB?' ✕':''}</div>`;
+        }).join('')}</div>`;
+}
+
+function pickTime(t){selectedTime=t;drawSlots();setTimeout(()=>showStep3(),200);}
+
+function showStep3(){
+    updateSteps(3);const dt=new Date(selectedDate);
+    document.getElementById('stepContent').innerHTML=`
         <div style="margin-bottom:12px;"><button class="btn-secondary" onclick="showStep2()" style="width:auto;">← Geri</button></div>
         <h3>✅ Randevu Özeti</h3>
         <div style="background:#f8f9fa;border-radius:12px;padding:22px;margin:18px 0;">
-            <div class="summary-row"><span class="summary-label">Öğretmen</span><span class="summary-value">${selectedTeacher.name}</span></div>
-            <div class="summary-row"><span class="summary-label">Branş</span><span class="summary-value">${selectedTeacher.branch||'-'}</span></div>
+            <div class="summary-row"><span class="summary-label">Öğretmen</span><span class="summary-value">${selectedTeacher.name} (${selectedTeacher.branch||''})</span></div>
             <div class="summary-row"><span class="summary-label">Tarih</span><span class="summary-value">${dt.getDate()} ${MONTHS[dt.getMonth()]} ${dt.getFullYear()}, ${DAYS_FULL[dt.getDay()]}</span></div>
             <div class="summary-row"><span class="summary-label">Saat</span><span class="summary-value">${selectedTime}</span></div>
             <div class="summary-row"><span class="summary-label">Öğrenci</span><span class="summary-value">${currentUser.studentName||'-'} (${currentUser.studentClass||'-'})</span></div>
         </div>
-        <div class="form-group">
-            <label>Görüşme Konusu *</label>
-            <select id="aptSubject">
-                <option value="">Konu Seçiniz</option>
-                <option>Ders Başarısı</option><option>Davranış</option><option>Devamsızlık</option>
-                <option>Sosyal Gelişim</option><option>Rehberlik</option><option>Diğer</option>
-            </select>
+        <div class="form-group"><label>Görüşme Konusu *</label>
+            <select id="aptSubject"><option value="">Seçin</option><option>Ders Başarısı</option><option>Davranış</option><option>Devamsızlık</option><option>Sosyal Gelişim</option><option>Rehberlik</option><option>Diğer</option></select>
         </div>
-        <div class="form-group">
-            <label>Not (İsteğe Bağlı)</label>
-            <textarea id="aptNote" placeholder="Eklemek istediğiniz not..."></textarea>
-        </div>
-        <button class="btn-primary" onclick="submitAppointment()" id="submitAptBtn">✅ Randevuyu Onayla</button>
-    `;
+        <div class="form-group"><label>Not (İsteğe Bağlı)</label><textarea id="aptNote" placeholder="Eklemek istediğiniz not..."></textarea></div>
+        <button class="btn-primary" onclick="submitApt()" id="submitAptBtn">✅ Randevuyu Onayla</button>`;
 }
 
-async function submitAppointment() {
-    const subject = document.getElementById('aptSubject').value;
-    if(!subject) {notify('Konu seçiniz','error');return;}
-    const note = document.getElementById('aptNote').value.trim();
-    const btn = document.getElementById('submitAptBtn');
-    btn.disabled=true; btn.textContent='Kaydediliyor...';
-
-    try {
-        const data = await GitDB.read('appointments');
+async function submitApt(){
+    const sub=document.getElementById('aptSubject').value;
+    if(!sub){notify('Konu seçiniz','error');return;}
+    const note=document.getElementById('aptNote').value.trim();
+    const btn=document.getElementById('submitAptBtn');
+    btn.disabled=true;btn.textContent='Kaydediliyor...';
+    try{
+        const data=await GitDB.read('appointments');
         data.appointments.push({
-            id: data.nextId,
-            teacherId: selectedTeacher.id,
-            teacherName: selectedTeacher.name,
-            teacherBranch: selectedTeacher.branch||'',
-            parentId: currentUser.id,
-            parentName: currentUser.name,
-            studentName: currentUser.studentName||'',
-            studentClass: currentUser.studentClass||'',
-            phone: currentUser.phone||'',
-            date: selectedDate,
-            time: selectedTime,
-            subject, note,
-            status: 'pending',
-            createdAt: new Date().toISOString()
+            id:data.nextId,teacherId:selectedTeacher.id,teacherName:selectedTeacher.name,
+            teacherBranch:selectedTeacher.branch||'',parentId:currentUser.id,parentName:currentUser.name,
+            studentName:currentUser.studentName||'',studentClass:currentUser.studentClass||'',
+            phone:currentUser.phone||'',date:selectedDate,time:selectedTime,subject:sub,note,
+            status:'pending',createdAt:new Date().toISOString()
         });
         data.nextId++;
-        await GitDB.write('appointments', data);
+        await GitDB.write('appointments',data);
         notify('Randevu talebiniz oluşturuldu! ✅','success');
         navigateTo('myAppointments');
-    } catch(e) {
-        notify('Hata: '+e.message,'error');
-        btn.disabled=false; btn.textContent='✅ Randevuyu Onayla';
-    }
+    }catch(e){notify('Hata: '+e.message,'error');btn.disabled=false;btn.textContent='✅ Randevuyu Onayla';}
 }
 
-// ===================== VELİ RANDEVULARIM =====================
-function renderMyAppointments(c) {
-    const apts = (GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.parentId===currentUser.id).sort((a,b)=>new Date(b.date)-new Date(a.date));
-    c.innerHTML = `
-        <div class="section-header">
-            <h2>📋 Randevularım</h2>
-            <button class="btn-success" onclick="navigateTo('newAppointment')">➕ Yeni Randevu</button>
-        </div>
+// ==================== VELİ RANDEVULARIM ====================
+function renderMyAppointments(c){
+    const apts=(GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.parentId===currentUser.id).sort((a,b)=>new Date(b.date)-new Date(a.date));
+    c.innerHTML=`
+        <div class="section-header"><h2>📋 Randevularım</h2><button class="btn-success" onclick="navigateTo('newAppointment')">➕ Yeni</button></div>
         <div class="card">
             <div class="tabs">
-                <button class="tab-btn active" onclick="filterMyApts('all',this)">Tümü (${apts.length})</button>
-                <button class="tab-btn" onclick="filterMyApts('pending',this)">Bekleyen (${apts.filter(a=>a.status==='pending').length})</button>
-                <button class="tab-btn" onclick="filterMyApts('approved',this)">Onaylı (${apts.filter(a=>a.status==='approved').length})</button>
-                <button class="tab-btn" onclick="filterMyApts('rejected',this)">Reddedilen (${apts.filter(a=>a.status==='rejected').length})</button>
+                <button class="tab-btn active" onclick="fMyApts('all',this)">Tümü (${apts.length})</button>
+                <button class="tab-btn" onclick="fMyApts('pending',this)">Bekleyen (${apts.filter(a=>a.status==='pending').length})</button>
+                <button class="tab-btn" onclick="fMyApts('approved',this)">Onaylı (${apts.filter(a=>a.status==='approved').length})</button>
             </div>
-            ${apts.length ? '<ul class="appointment-list" id="myAptList">'+apts.map(a=>renderAptItem(a,true)).join('')+'</ul>' :
-            '<div class="empty-state"><div class="empty-icon">📭</div><p>Henüz randevunuz yok</p><button class="btn-primary" style="width:auto;margin-top:12px;" onclick="navigateTo(\'newAppointment\')">İlk Randevunuzu Oluşturun</button></div>'}
-        </div>
-    `;
+            ${apts.length?'<ul class="appointment-list" id="myAL">'+apts.map(a=>renderAptItem(a,true)).join('')+'</ul>':
+            '<div class="empty-state"><div class="empty-icon">📭</div><p>Randevunuz yok</p></div>'}
+        </div>`;
 }
 
-function filterMyApts(status, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    let apts = (GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.parentId===currentUser.id);
-    if(status!=='all') apts=apts.filter(a=>a.status===status);
-    apts.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    const el=document.getElementById('myAptList');
-    if(el) el.innerHTML = apts.length ? apts.map(a=>renderAptItem(a,true)).join('') : '<div class="empty-state"><div class="empty-icon">📭</div><p>Bu kategoride randevu yok</p></div>';
+function fMyApts(st,btn){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    let a=(GitDB.getCached('appointments')?.appointments||[]).filter(x=>x.parentId===currentUser.id);
+    if(st!=='all')a=a.filter(x=>x.status===st);a.sort((x,y)=>new Date(y.date)-new Date(x.date));
+    const el=document.getElementById('myAL');
+    if(el)el.innerHTML=a.length?a.map(x=>renderAptItem(x,true)).join(''):'<div class="empty-state"><p>Bu kategoride randevu yok</p></div>';
 }
 
-// ===================== ÖĞRETMEN GELEN RANDEVULAR =====================
-function renderIncomingApts(c) {
-    const apts = (GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.teacherId===currentUser.id).sort((a,b)=>new Date(b.createdAt||b.date)-new Date(a.createdAt||a.date));
-    c.innerHTML = `
+// ==================== ÖĞRETMEN GELEN TALEPLER ====================
+function renderIncomingApts(c){
+    const apts=(GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.teacherId===currentUser.id).sort((a,b)=>new Date(b.date)-new Date(a.date));
+    c.innerHTML=`
         <div class="section-header"><h2>📥 Gelen Randevu Talepleri</h2></div>
         <div class="card">
             <div class="tabs">
-                <button class="tab-btn active" onclick="filterIncApts('all',this)">Tümü (${apts.length})</button>
-                <button class="tab-btn" onclick="filterIncApts('pending',this)">Bekleyen (${apts.filter(a=>a.status==='pending').length})</button>
-                <button class="tab-btn" onclick="filterIncApts('approved',this)">Onaylı (${apts.filter(a=>a.status==='approved').length})</button>
+                <button class="tab-btn active" onclick="fIncApts('all',this)">Tümü (${apts.length})</button>
+                <button class="tab-btn" onclick="fIncApts('pending',this)">Bekleyen (${apts.filter(a=>a.status==='pending').length})</button>
+                <button class="tab-btn" onclick="fIncApts('approved',this)">Onaylı (${apts.filter(a=>a.status==='approved').length})</button>
             </div>
-            ${apts.length ? '<ul class="appointment-list" id="incAptList">'+apts.map(a=>renderTeacherAptItem(a)).join('')+'</ul>' :
-            '<div class="empty-state"><div class="empty-icon">📭</div><p>Henüz randevu talebi yok</p></div>'}
-        </div>
-    `;
+            ${apts.length?'<ul class="appointment-list" id="incAL">'+apts.map(a=>renderTAptItem(a)).join('')+'</ul>':
+            '<div class="empty-state"><div class="empty-icon">📭</div><p>Randevu talebi yok</p></div>'}
+        </div>`;
 }
 
-function filterIncApts(status, btn) {
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    let apts = (GitDB.getCached('appointments')?.appointments||[]).filter(a=>a.teacherId===currentUser.id);
-    if(status!=='all') apts=apts.filter(a=>a.status===status);
-    const el=document.getElementById('incAptList');
-    if(el) el.innerHTML = apts.length ? apts.map(a=>renderTeacherAptItem(a)).join('') : '<div class="empty-state"><div class="empty-icon">📭</div><p>Bu kategoride randevu yok</p></div>';
+function fIncApts(st,btn){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');
+    let a=(GitDB.getCached('appointments')?.appointments||[]).filter(x=>x.teacherId===currentUser.id);
+    if(st!=='all')a=a.filter(x=>x.status===st);
+    const el=document.getElementById('incAL');
+    if(el)el.innerHTML=a.length?a.map(x=>renderTAptItem(x)).join(''):'<div class="empty-state"><p>Bu kategoride randevu yok</p></div>';
 }
 
-async function changeAptStatus(id, status) {
-    showLoader();
-    try {
-        const data = await GitDB.read('appointments');
-        const idx = data.appointments.findIndex(a=>a.id===id);
-        if(idx!==-1) {
-            data.appointments[idx].status = status;
-            data.appointments[idx].updatedAt = new Date().toISOString();
-            await GitDB.write('appointments', data);
-            const t={approved:'onaylandı ✅',rejected:'reddedildi ❌',completed:'tamamlandı ✔'};
-            notify('Randevu '+t[status], status==='rejected'?'error':'success');
-        }
+async function changeStatus(id,status){
+    showLoader(true,'Güncelleniyor...');
+    try{
+        const data=await GitDB.read('appointments');
+        const i=data.appointments.findIndex(a=>a.id===id);
+        if(i!==-1){data.appointments[i].status=status;data.appointments[i].updatedAt=new Date().toISOString();}
+        await GitDB.write('appointments',data);
+        const t={approved:'onaylandı ✅',rejected:'reddedildi ❌',completed:'tamamlandı ✔'};
+        notify('Randevu '+t[status],status==='rejected'?'error':'success');
         navigateTo(currentPage);
-    } catch(e) {
-        notify('Hata: '+e.message,'error');
-        showLoader(false);
-    }
+    }catch(e){notify('Hata: '+e.message,'error');showLoader(false);}
 }
 
-async function cancelApt(id) {
-    if(!confirm('Bu randevuyu iptal etmek istediğinize emin misiniz?')) return;
-    showLoader();
-    try {
-        const data = await GitDB.read('appointments');
-        data.appointments = data.appointments.filter(a=>a.id!==id);
-        await GitDB.write('appointments', data);
+async function cancelApt(id){
+    if(!confirm('Randevuyu iptal etmek istediğinize emin misiniz?'))return;
+    showLoader(true,'İptal ediliyor...');
+    try{
+        const data=await GitDB.read('appointments');
+        data.appointments=data.appointments.filter(a=>a.id!==id);
+        await GitDB.write('appointments',data);
         notify('Randevu iptal edildi','info');
         navigateTo('myAppointments');
-    } catch(e) {
-        notify('Hata: '+e.message,'error');
-        showLoader(false);
-    }
+    }catch(e){notify('Hata: '+e.message,'error');showLoader(false);}
 }
 
-// ===================== ÖĞRETMEN MÜSAİTLİK YÖNETİMİ =====================
-function renderSchedule(c) {
-    const schData = GitDB.getCached('schedules')||{weeklyBlocks:[],specificBlocks:[]};
-    const myBlocks = schData.weeklyBlocks.filter(b=>b.teacherId===currentUser.id);
+// ==================== ÖĞRETMEN MÜSAİTLİK ====================
+function renderSchedule(c){
+    const sch=GitDB.getCached('schedules')||{weeklyBlocks:[]};
+    const myB=sch.weeklyBlocks.filter(b=>b.teacherId===currentUser.id);
+    const dayL=['','Pazartesi','Salı','Çarşamba','Perşembe','Cuma'];
 
-    // Günlere göre grupla
-    const dayLabels = ['','Pazartesi','Salı','Çarşamba','Perşembe','Cuma'];
-
-    c.innerHTML = `
+    c.innerHTML=`
         <div class="section-header"><h2>📅 Haftalık Müsaitlik Yönetimi</h2></div>
         <div class="card">
             <div class="info-box">
-                <strong>ℹ️ Nasıl çalışır?</strong><br>
-                Aşağıdaki tablodan kapatmak istediğiniz gün ve saatlere tıklayın.
-                <span style="color:#e74c3c;">🔴 Kırmızı</span> = Kapalı, <span style="color:#27ae60;">🟢 Yeşil</span> = Açık.<br>
-                Bu ayarlar <strong>her hafta otomatik</strong> uygulanır. Bir kere ayarlayın, her hafta geçerli olsun!
+                <strong>ℹ️ Kullanım:</strong> Kapatmak istediğiniz saatlere tıklayın.
+                🟢 Açık, 🔴 Kapalı. Bu ayar <strong>her hafta otomatik</strong> uygulanır.
             </div>
             <div class="weekly-grid">
                 <div class="weekly-header">Saat</div>
-                ${[1,2,3,4,5].map(d=>`<div class="weekly-header">${dayLabels[d]}</div>`).join('')}
+                ${[1,2,3,4,5].map(d=>`<div class="weekly-header">${dayL[d]}</div>`).join('')}
                 ${TIME_SLOTS.map(time=>`
                     <div class="weekly-time">${time}</div>
                     ${[1,2,3,4,5].map(day=>{
-                        const isBlocked = myBlocks.some(b=>b.dayOfWeek===day&&b.time===time);
-                        return `<div class="weekly-cell ${isBlocked?'blocked':'available'}" onclick="toggleWeeklyBlock(${day},'${time}')" title="${dayLabels[day]} ${time}">
-                            <span class="cell-icon">${isBlocked?'🔴':'🟢'}</span>
-                        </div>`;
+                        const isB=myB.some(b=>b.dayOfWeek===day&&b.time===time);
+                        return `<div class="weekly-cell ${isB?'blocked':'available'}" onclick="toggleBlock(${day},'${time}')">
+                            <span class="cell-icon">${isB?'🔴':'🟢'}</span></div>`;
                     }).join('')}
                 `).join('')}
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
-async function toggleWeeklyBlock(dayOfWeek, time) {
-    showLoader();
-    try {
-        const data = await GitDB.read('schedules');
-        const idx = data.weeklyBlocks.findIndex(b=>b.teacherId===currentUser.id&&b.dayOfWeek===dayOfWeek&&b.time===time);
-
-        if(idx!==-1) {
-            // Kaldır
-            data.weeklyBlocks.splice(idx, 1);
-        } else {
-            // Ekle
-            data.weeklyBlocks.push({
-                teacherId: currentUser.id,
-                dayOfWeek: dayOfWeek,
-                time: time
-            });
-        }
-
-        await GitDB.write('schedules', data);
+async function toggleBlock(day,time){
+    showLoader(true,'Güncelleniyor...');
+    try{
+        const data=await GitDB.read('schedules');
+        if(!data.weeklyBlocks)data.weeklyBlocks=[];
+        const i=data.weeklyBlocks.findIndex(b=>b.teacherId===currentUser.id&&b.dayOfWeek===day&&b.time===time);
+        if(i!==-1)data.weeklyBlocks.splice(i,1);
+        else data.weeklyBlocks.push({teacherId:currentUser.id,dayOfWeek:day,time:time});
+        await GitDB.write('schedules',data);
         navigateTo('schedule');
-    } catch(e) {
-        notify('Hata: '+e.message,'error');
-        showLoader(false);
-    }
+    }catch(e){notify('Hata: '+e.message,'error');showLoader(false);}
 }
 
-// ===================== YÖNETİCİ - TÜM RANDEVULAR =====================
-function renderAllApts(c) {
-    const apts = (GitDB.getCached('appointments')?.appointments||[]).sort((a,b)=>new Date(b.date)-new Date(a.date));
-    const users = GitDB.getCached('users')?.users||[];
-    const teachers = users.filter(u=>u.role==='ogretmen');
-
-    c.innerHTML = `
+// ==================== YÖNETİCİ SAYFALAR ====================
+function renderAllApts(c){
+    const apts=(GitDB.getCached('appointments')?.appointments||[]).sort((a,b)=>new Date(b.date)-new Date(a.date));
+    const users=GitDB.getCached('users')?.users||[];
+    const ts=users.filter(u=>u.role==='ogretmen');
+    c.innerHTML=`
         <div class="section-header"><h2>📋 Tüm Randevular</h2></div>
         <div class="card">
             <div class="filter-row">
-                <select onchange="filterAllApts()" id="fTeacher"><option value="">Tüm Öğretmenler</option>${teachers.map(t=>`<option value="${t.id}">${t.name}</option>`).join('')}</select>
-                <select onchange="filterAllApts()" id="fStatus"><option value="">Tüm Durumlar</option><option value="pending">Beklemede</option><option value="approved">Onaylı</option><option value="rejected">Reddedilmiş</option><option value="completed">Tamamlanmış</option></select>
-                <input type="date" onchange="filterAllApts()" id="fDate">
+                <select onchange="fAllApts()" id="fT"><option value="">Tüm Öğretmenler</option>${ts.map(t=>`<option value="${t.id}">${t.name}</option>`).join('')}</select>
+                <select onchange="fAllApts()" id="fS"><option value="">Tüm Durumlar</option><option value="pending">Beklemede</option><option value="approved">Onaylı</option><option value="rejected">Reddedilmiş</option><option value="completed">Tamamlanmış</option></select>
+                <input type="date" onchange="fAllApts()" id="fD">
             </div>
-            <div class="search-box"><input type="text" placeholder="Veli veya öğrenci ara..." oninput="filterAllApts()" id="fSearch"></div>
-            <ul class="appointment-list" id="allAptList">
-                ${apts.length ? apts.map(a=>renderTeacherAptItem(a,true)).join('') : '<div class="empty-state"><div class="empty-icon">📭</div><p>Randevu yok</p></div>'}
-            </ul>
-        </div>
-    `;
+            <div class="search-box"><input type="text" placeholder="Veli veya öğrenci ara..." oninput="fAllApts()" id="fQ"></div>
+            <ul class="appointment-list" id="allAL">${apts.length?apts.map(a=>renderTAptItem(a,true)).join(''):'<div class="empty-state"><div class="empty-icon">📭</div><p>Randevu yok</p></div>'}</ul>
+        </div>`;
 }
 
-function filterAllApts() {
-    const tf = document.getElementById('fTeacher').value;
-    const sf = document.getElementById('fStatus').value;
-    const df = document.getElementById('fDate').value;
-    const sq = (document.getElementById('fSearch').value||'').toLowerCase();
-    let apts = GitDB.getCached('appointments')?.appointments||[];
-    if(tf) apts=apts.filter(a=>a.teacherId==tf);
-    if(sf) apts=apts.filter(a=>a.status===sf);
-    if(df) apts=apts.filter(a=>a.date===df);
-    if(sq) apts=apts.filter(a=>(a.parentName||'').toLowerCase().includes(sq)||(a.studentName||'').toLowerCase().includes(sq));
-    apts.sort((a,b)=>new Date(b.date)-new Date(a.date));
-    document.getElementById('allAptList').innerHTML = apts.length ? apts.map(a=>renderTeacherAptItem(a,true)).join('') : '<div class="empty-state"><div class="empty-icon">🔍</div><p>Sonuç bulunamadı</p></div>';
+function fAllApts(){
+    const tf=document.getElementById('fT').value,sf=document.getElementById('fS').value,df=document.getElementById('fD').value,sq=(document.getElementById('fQ').value||'').toLowerCase();
+    let a=GitDB.getCached('appointments')?.appointments||[];
+    if(tf)a=a.filter(x=>x.teacherId==tf);if(sf)a=a.filter(x=>x.status===sf);if(df)a=a.filter(x=>x.date===df);
+    if(sq)a=a.filter(x=>(x.parentName||'').toLowerCase().includes(sq)||(x.studentName||'').toLowerCase().includes(sq));
+    a.sort((x,y)=>new Date(y.date)-new Date(x.date));
+    document.getElementById('allAL').innerHTML=a.length?a.map(x=>renderTAptItem(x,true)).join(''):'<div class="empty-state"><p>Sonuç yok</p></div>';
 }
 
-// ===================== YÖNETİCİ - ÖĞRETMENLER =====================
-function renderTeachers(c) {
-    const users = GitDB.getCached('users')?.users||[];
-    const teachers = users.filter(u=>u.role==='ogretmen');
-    const apts = GitDB.getCached('appointments')?.appointments||[];
-
-    c.innerHTML = `
-        <div class="section-header"><h2>👩‍🏫 Öğretmen Listesi</h2></div>
-        <div class="card">
-            <div class="teacher-grid">
-                ${teachers.map(t=>{
-                    const ta=apts.filter(a=>a.teacherId===t.id);
-                    return `<div class="teacher-card" style="cursor:default;">
-                        <div class="teacher-avatar">${t.name.charAt(0)}</div>
-                        <div class="teacher-info">
-                            <h4>${t.name}</h4>
-                            <p>${t.branch||'-'}</p>
-                            <p style="font-size:0.78em;color:#999;">Sınıflar: ${t.classes||'-'}</p>
-                            <p style="font-size:0.78em;margin-top:4px;">
-                                <span style="color:#f39c12;">⏳ ${ta.filter(a=>a.status==='pending').length}</span> |
-                                <span style="color:#27ae60;">✅ ${ta.filter(a=>a.status==='approved').length}</span> |
-                                <span style="color:#2196f3;">✔ ${ta.filter(a=>a.status==='completed').length}</span>
-                            </p>
-                        </div>
-                    </div>`;
-                }).join('')}
-            </div>
-        </div>
-    `;
+function renderTeachersPage(c){
+    const users=GitDB.getCached('users')?.users||[];
+    const ts=users.filter(u=>u.role==='ogretmen');
+    const apts=GitDB.getCached('appointments')?.appointments||[];
+    c.innerHTML=`
+        <div class="section-header"><h2>👩‍🏫 Öğretmenler</h2></div>
+        <div class="card"><div class="teacher-grid">${ts.map(t=>{
+            const ta=apts.filter(a=>a.teacherId===t.id);
+            return `<div class="teacher-card" style="cursor:default;"><div class="teacher-avatar">${t.name.charAt(0)}</div>
+                <div class="teacher-info"><h4>${t.name}</h4><p>${t.branch||'-'}</p><p style="font-size:0.78em;color:#999;">Sınıflar: ${t.classes||'-'}</p>
+                <p style="font-size:0.78em;margin-top:4px;"><span style="color:#f39c12;">⏳${ta.filter(a=>a.status==='pending').length}</span> | <span style="color:#27ae60;">✅${ta.filter(a=>a.status==='approved').length}</span> | <span style="color:#2196f3;">✔${ta.filter(a=>a.status==='completed').length}</span></p></div></div>`;
+        }).join('')}</div></div>`;
 }
 
-// ===================== YÖNETİCİ - RAPORLAR =====================
-function renderReports(c) {
-    const apts = GitDB.getCached('appointments')?.appointments||[];
-    const users = GitDB.getCached('users')?.users||[];
-    const teachers = users.filter(u=>u.role==='ogretmen');
-    const total=apts.length, pending=apts.filter(a=>a.status==='pending').length, approved=apts.filter(a=>a.status==='approved').length, rejected=apts.filter(a=>a.status==='rejected').length, completed=apts.filter(a=>a.status==='completed').length;
-
-    const subjects={};
-    apts.forEach(a=>{subjects[a.subject]=(subjects[a.subject]||0)+1;});
-
-    const tStats = teachers.map(t=>({...t, count:apts.filter(a=>a.teacherId===t.id).length})).sort((a,b)=>b.count-a.count);
-    const maxCount = tStats[0]?.count||1;
-
-    c.innerHTML = `
-        <div class="section-header"><h2>📈 Raporlar & İstatistikler</h2></div>
+function renderReports(c){
+    const apts=GitDB.getCached('appointments')?.appointments||[];
+    const users=GitDB.getCached('users')?.users||[];
+    const ts=users.filter(u=>u.role==='ogretmen');
+    const total=apts.length,pending=apts.filter(a=>a.status==='pending').length,approved=apts.filter(a=>a.status==='approved').length,rejected=apts.filter(a=>a.status==='rejected').length,completed=apts.filter(a=>a.status==='completed').length;
+    const subs={};apts.forEach(a=>{subs[a.subject]=(subs[a.subject]||0)+1;});
+    const tS=ts.map(t=>({...t,count:apts.filter(a=>a.teacherId===t.id).length})).sort((a,b)=>b.count-a.count);
+    const mx=tS[0]?.count||1;
+    c.innerHTML=`
+        <div class="section-header"><h2>📈 Raporlar</h2></div>
         <div class="stats-grid">
             <div class="stat-card"><div class="stat-icon blue">📋</div><div class="stat-info"><h3>${total}</h3><p>Toplam</p></div></div>
             <div class="stat-card"><div class="stat-icon orange">⏳</div><div class="stat-info"><h3>${pending}</h3><p>Bekleyen</p></div></div>
@@ -1201,105 +1118,96 @@ function renderReports(c) {
             <div class="stat-card"><div class="stat-icon red">❌</div><div class="stat-info"><h3>${rejected}</h3><p>Reddedilen</p></div></div>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
-            <div class="card">
-                <h3>📌 Konu Dağılımı</h3>
-                ${Object.entries(subjects).length ? Object.entries(subjects).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
+            <div class="card"><h3>📌 Konu Dağılımı</h3>
+                ${Object.entries(subs).length?Object.entries(subs).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`
                     <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;">
-                        <span style="font-weight:600;color:#555;font-size:0.9em;">${k}</span>
+                        <span style="font-weight:600;color:#555;font-size:0.88em;">${k}</span>
                         <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:${Math.max(v/total*180,15)}px;height:7px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:4px;"></div>
-                            <span style="font-weight:700;color:#4a3f8a;font-size:0.9em;">${v}</span>
-                        </div>
-                    </div>
-                `).join('') : '<p style="color:#888;">Veri yok</p>'}
+                            <div style="width:${Math.max(v/total*160,12)}px;height:7px;background:linear-gradient(135deg,#667eea,#764ba2);border-radius:4px;"></div>
+                            <span style="font-weight:700;color:#4a3f8a;font-size:0.88em;">${v}</span>
+                        </div></div>`).join(''):'<p style="color:#888;">Veri yok</p>'}
             </div>
-            <div class="card">
-                <h3>👩‍🏫 Öğretmen Bazlı</h3>
-                ${tStats.map(t=>`
+            <div class="card"><h3>👩‍🏫 Öğretmen Bazlı</h3>
+                ${tS.map(t=>`
                     <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f0f0f0;">
-                        <span style="font-weight:600;color:#555;font-size:0.9em;">${t.name}</span>
+                        <span style="font-weight:600;color:#555;font-size:0.88em;">${t.name}</span>
                         <div style="display:flex;align-items:center;gap:8px;">
-                            <div style="width:${Math.max(t.count/maxCount*140,8)}px;height:7px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:4px;"></div>
-                            <span style="font-weight:700;color:#27ae60;font-size:0.9em;">${t.count}</span>
-                        </div>
-                    </div>
-                `).join('')}
+                            <div style="width:${Math.max(t.count/mx*130,6)}px;height:7px;background:linear-gradient(135deg,#2ecc71,#27ae60);border-radius:4px;"></div>
+                            <span style="font-weight:700;color:#27ae60;font-size:0.88em;">${t.count}</span>
+                        </div></div>`).join('')}
             </div>
-        </div>
-    `;
+        </div>`;
 }
 
-// ===================== RENDER HELPERS =====================
-function renderAptItem(a, showCancel=false) {
+// ==================== RENDER HELPERS ====================
+function renderAptItem(a,showCancel=false){
     const dt=new Date(a.date);
     return `<li class="appointment-item">
         <div class="appointment-info">
             <div class="apt-date-badge"><div class="day">${dt.getDate()}</div><div class="month">${MONTHS_S[dt.getMonth()]}</div></div>
-            <div class="apt-details">
-                <h4>${a.teacherName} - ${a.teacherBranch||''}</h4>
+            <div class="apt-details"><h4>${a.teacherName} - ${a.teacherBranch||''}</h4>
                 <p>🕐 ${a.time} | 📌 ${a.subject||'-'}</p>
-                ${a.note?`<p style="font-size:0.8em;color:#999;">📝 ${a.note}</p>`:''}
-            </div>
+                ${a.note?`<p style="font-size:0.8em;color:#999;">📝 ${a.note}</p>`:''}</div>
         </div>
         <div class="apt-actions">
             <span class="status-badge ${a.status}">${STATUS_TEXT[a.status]||a.status}</span>
-            ${showCancel&&a.status==='pending'?`<button class="btn-danger" onclick="cancelApt(${a.id})">İptal</button>`:''}
-        </div>
-    </li>`;
+            ${showCancel&&a.status==='pending'?`<button class="btn-danger btn-sm" onclick="cancelApt(${a.id})">İptal</button>`:''}
+        </div></li>`;
 }
 
-function renderTeacherAptItem(a, isAdmin=false) {
+function renderTAptItem(a,isAdmin=false){
     const dt=new Date(a.date);
     return `<li class="appointment-item">
         <div class="appointment-info">
             <div class="apt-date-badge"><div class="day">${dt.getDate()}</div><div class="month">${MONTHS_S[dt.getMonth()]}</div></div>
-            <div class="apt-details">
-                <h4>${a.parentName} → ${a.studentName} (${a.studentClass||'-'})</h4>
+            <div class="apt-details"><h4>${a.parentName} → ${a.studentName} (${a.studentClass||'-'})</h4>
                 <p>🕐 ${a.time} | 📌 ${a.subject||'-'}${isAdmin?' | 👩‍🏫 '+a.teacherName:''}</p>
                 ${a.note?`<p style="font-size:0.8em;color:#999;">📝 ${a.note}</p>`:''}
-                ${a.phone?`<p style="font-size:0.8em;color:#999;">📞 ${a.phone}</p>`:''}
-            </div>
+                ${a.phone?`<p style="font-size:0.8em;color:#999;">📞 ${a.phone}</p>`:''}</div>
         </div>
         <div class="apt-actions">
             <span class="status-badge ${a.status}">${STATUS_TEXT[a.status]||a.status}</span>
-            ${a.status==='pending'?`
-                <button class="btn-success btn-sm" onclick="changeAptStatus(${a.id},'approved')">✅ Onayla</button>
-                <button class="btn-danger btn-sm" onclick="changeAptStatus(${a.id},'rejected')">❌ Reddet</button>
-            `:''}
-            ${a.status==='approved'?`<button class="btn-warning btn-sm" onclick="changeAptStatus(${a.id},'completed')">✔ Tamamla</button>`:''}
-        </div>
-    </li>`;
+            ${a.status==='pending'?`<button class="btn-success btn-sm" onclick="changeStatus(${a.id},'approved')">✅</button><button class="btn-danger btn-sm" onclick="changeStatus(${a.id},'rejected')">❌</button>`:''}
+            ${a.status==='approved'?`<button class="btn-warning btn-sm" onclick="changeStatus(${a.id},'completed')">✔</button>`:''}
+        </div></li>`;
 }
 
-// ===================== BAŞLANGIÇ =====================
-async function init() {
-    showLoader();
-    try {
+// ==================== INIT ====================
+async function init(){
+    showLoader(true,'Sistem başlatılıyor...');
+
+    if(!loadConfig()||!CONFIG.GITHUB_OWNER||!CONFIG.GITHUB_TOKEN){
+        showLoader(false);
+        showSetup();
+        return;
+    }
+
+    try{
         await GitDB.read('users');
         await GitDB.read('appointments');
         await GitDB.read('schedules');
 
         // Oturum kontrolü
-        const saved = localStorage.getItem('currentUser');
-        if(saved) {
-            const u = JSON.parse(saved);
-            const users = GitDB.getCached('users')?.users||[];
-            const fresh = users.find(x=>x.id===u.id&&x.username===u.username);
-            if(fresh) {
-                currentUser = fresh;
-                enterApp();
-                showLoader(false);
-                return;
-            }
+        const saved=localStorage.getItem('currentUser');
+        if(saved){
+            const u=JSON.parse(saved);
+            const users=GitDB.getCached('users')?.users||[];
+            const fresh=users.find(x=>x.id===u.id&&x.username===u.username);
+            if(fresh){currentUser=fresh;enterApp();showLoader(false);return;}
         }
 
+        showLoader(false);
         document.getElementById('authPage').classList.remove('hidden');
-    } catch(e) {
-        document.getElementById('authPage').classList.remove('hidden');
-        notify('Sunucu bağlantısı kurulamadı. Ayarları kontrol edin.','error');
-        console.error('Init error:', e);
+    }catch(e){
+        showLoader(false);
+        if(e.message==='BAD_CREDENTIALS'){
+            notify('GitHub token geçersiz! Ayarları kontrol edin.','error');
+            showSetup();
+        }else{
+            notify('Bağlantı hatası. Ayarları kontrol edin.','error');
+            showSetup();
+        }
     }
-    showLoader(false);
 }
 
 init();
