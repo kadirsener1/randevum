@@ -17,57 +17,7 @@
       "branch": "Matematik",
       "classes": "5-A, 6-B",
       "email": "ayse@okul.com"
-    },
-    {
-      "id": 3,
-      "username": "mehmet.kaya",
-      "password": "ogretmen123",
-      "role": "ogretmen",
-      "name": "Mehmet Kaya",
-      "branch": "Türkçe",
-      "classes": "5-A, 5-B",
-      "email": "mehmet@okul.com"
-    },
-    {
-      "id": 4,
-      "username": "fatma.demir",
-      "password": "ogretmen123",
-      "role": "ogretmen",
-      "name": "Fatma Demir",
-      "branch": "Fen Bilimleri",
-      "classes": "6-A, 7-A",
-      "email": "fatma@okul.com"
-    },
-    {
-      "id": 5,
-      "username": "ali.ozturk",
-      "password": "ogretmen123",
-      "role": "ogretmen",
-      "name": "Ali Öztürk",
-      "branch": "Sosyal Bilgiler",
-      "classes": "5-B, 6-A",
-      "email": "ali@okul.com"
-    },
-    {
-      "id": 6,
-      "username": "zeynep.acar",
-      "password": "ogretmen123",
-      "role": "ogretmen",
-      "name": "Zeynep Acar",
-      "branch": "İngilizce",
-      "classes": "5-A, 6-A, 7-A",
-      "email": "zeynep@okul.com"
-    },
-    {
-      "id": 7,
-      "username": "emre.koc",
-      "password": "ogretmen123",
-      "role": "ogretmen",
-      "name": "Emre Koç",
-      "branch": "Rehberlik",
-      "classes": "Tüm Sınıflar",
-      "email": "emre@okul.com"
     }
   ],
-  "nextId": 8
+  "nextId": 3
 }
